@@ -158,7 +158,7 @@
   }
 
   .container-wide {
-    max-width: 960px;
+    /* max-width: 960px; */
     margin: 0 auto;
     padding: 0 32px;
   }
@@ -221,6 +221,7 @@
     gap: 0;
     overflow-x: auto;
     scrollbar-width: none;
+    justify-content: center;
   }
   .toc-inner::-webkit-scrollbar { display: none; }
 
@@ -238,6 +239,7 @@
   }
   .toc-inner a:first-child { padding-left: 0; }
   .toc-inner a:hover { color: var(--accent); }
+  .toc-inner a:last-child { border-right: none; }
 
   /* ─── ARTICLE BODY ────────────────────────────────────── */
   .article-body { padding: 64px 0 0px; }
@@ -414,7 +416,7 @@
     background: white;
     border: 1px solid var(--rule);
     border-radius: 12px;
-    padding: 40px 32px;
+    padding: 10px;
     margin: 40px 0;
     overflow-x: auto;
   }
@@ -819,136 +821,7 @@
   </p>
 
   <div class="diagram-wrap">
-    <svg viewBox="0 0 740 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;display:block;margin:0 auto">
-      <defs>
-        <marker id="arr-ov" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#888"/>
-        </marker>
-        <marker id="arr-ov-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#1a6b3c"/>
-        </marker>
-        <marker id="arr-ov-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#1a3a6b"/>
-        </marker>
-        <marker id="arr-ov-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#c0392b"/>
-        </marker>
-      </defs>
-
-      <!-- Background zones -->
-      <rect x="8" y="8" width="218" height="400" rx="10" fill="#e8edf5" stroke="#1a3a6b" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
-      <text x="117" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a3a6b" letter-spacing="0.1em" font-weight="500" text-transform="uppercase">STUDENT DEVICES (N)</text>
-
-      <rect x="240" y="8" width="200" height="400" rx="10" fill="#fff8f0" stroke="#b36000" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
-      <text x="340" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7a4000" letter-spacing="0.1em" font-weight="500">MEDIA LAYER</text>
-
-      <rect x="454" y="8" width="280" height="400" rx="10" fill="#f0f5f0" stroke="#1a6b3c" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
-      <text x="594" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a6b3c" letter-spacing="0.1em" font-weight="500">BACKEND + ADMIN</text>
-
-      <!-- Student device box -->
-      <rect x="22" y="44" width="190" height="260" rx="8" fill="white" stroke="#1a3a6b" stroke-width="1.5"/>
-      <text x="117" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a3a6b" font-weight="500">Student Browser</text>
-      <rect x="38" y="76" width="158" height="30" rx="5" fill="#e8edf5" stroke="#99aac8" stroke-width="1"/>
-      <text x="117" y="96" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a3a6b">Webcam Capture</text>
-      <rect x="38" y="116" width="158" height="30" rx="5" fill="#fff3e0" stroke="#b36000" stroke-width="1"/>
-      <text x="117" y="136" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#7a4000">MediaPipe WASM</text>
-      <rect x="38" y="156" width="158" height="30" rx="5" fill="#e8edf5" stroke="#99aac8" stroke-width="1"/>
-      <text x="117" y="176" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a3a6b">Face Landmarker (GPU)</text>
-      <rect x="38" y="196" width="158" height="30" rx="5" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1"/>
-      <text x="117" y="216" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a6b3c">Violation Scoring</text>
-      <rect x="38" y="236" width="158" height="58" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="1"/>
-      <text x="117" y="257" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Score + flags → Socket.IO</text>
-      <text x="117" y="273" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Evidence JPEG → HTTP</text>
-      <text x="117" y="289" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">WebRTC stream → SFU</text>
-
-      <!-- Multiple students indicator -->
-      <rect x="28" y="320" width="178" height="60" rx="6" fill="white" stroke="#1a3a6b" stroke-width="1" opacity="0.6"/>
-      <text x="117" y="356" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a3a6b" font-style="italic">N × same device topology</text>
-      <text x="117" y="373" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#888">Each contributes its own compute</text>
-
-      <!-- SFU -->
-      <rect x="258" y="44" width="164" height="100" rx="8" fill="white" stroke="#b36000" stroke-width="1.5"/>
-      <text x="340" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7a4000" font-weight="500">WebRTC SFU</text>
-      <text x="340" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#a06000">Selective Forwarding Unit</text>
-      <text x="340" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#a06000">RTP routing only</text>
-      <text x="340" y="118" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#a06000">Multi-worker · Port 5002</text>
-
-      <!-- LMS Backend -->
-      <rect x="258" y="164" width="164" height="120" rx="8" fill="white" stroke="#c62828" stroke-width="1.5"/>
-      <text x="340" y="188" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">LMS Backend</text>
-      <text x="340" y="206" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Score validation</text>
-      <text x="340" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Redis dedup (server-side)</text>
-      <text x="340" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Socket.IO broadcast</text>
-      <text x="340" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Report generation queue</text>
-
-      <!-- Queue -->
-      <rect x="258" y="304" width="164" height="60" rx="8" fill="white" stroke="#6a1a8a" stroke-width="1.5"/>
-      <text x="340" y="328" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Job Queue</text>
-      <text x="340" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Async report + webhook</text>
-
-      <!-- Redis -->
-      <rect x="470" y="44" width="130" height="70" rx="8" fill="white" stroke="#c62828" stroke-width="1.5"/>
-      <text x="535" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">Redis</text>
-      <text x="535" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">TTL dedup · violation counts</text>
-      <text x="535" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#c62828">session:{quiz}:{student}</text>
-
-      <!-- S3 -->
-      <rect x="470" y="134" width="130" height="60" rx="8" fill="white" stroke="#6a1a8a" stroke-width="1.5"/>
-      <text x="535" y="158" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Object Storage</text>
-      <text x="535" y="176" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Evidence frames (JPEG)</text>
-
-      <!-- DB -->
-      <rect x="470" y="214" width="130" height="60" rx="8" fill="white" stroke="#1a3a6b" stroke-width="1.5"/>
-      <text x="535" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a3a6b" font-weight="500">Database</text>
-      <text x="535" y="256" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a3a6b">Violation reports</text>
-
-      <!-- Admin Dashboard -->
-      <rect x="618" y="44" width="104" height="160" rx="8" fill="white" stroke="#1a6b3c" stroke-width="1.5"/>
-      <text x="670" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c" font-weight="500">Admin</text>
-      <text x="670" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c" font-weight="500">Dashboard</text>
-      <text x="670" y="108" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Virtual grid</text>
-      <text x="670" y="124" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Score store</text>
-      <text x="670" y="140" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Stream budget</text>
-      <text x="670" y="156" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Phase model</text>
-      <text x="670" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">useSyncExtStore</text>
-      <text x="670" y="193" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">WebRTC streams ↑</text>
-
-      <!-- Arrows -->
-      <!-- Student → SFU (media) -->
-      <line x1="214" y1="90" x2="256" y2="85" stroke="#b36000" stroke-width="1.5" marker-end="url(#arr-ov)"/>
-      <text x="235" y="80" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#b36000">WebRTC</text>
-
-      <!-- Student → LMS (scores) -->
-      <line x1="214" y1="248" x2="256" y2="220" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr-ov-r)"/>
-      <text x="228" y="240" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#c0392b">scores</text>
-
-      <!-- Student → S3 (evidence) -->
-      <path d="M214 268 Q270 268 270 194 L468 160" stroke="#6a1a8a" stroke-width="1.2" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-ov)"/>
-      <text x="330" y="258" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#6a1a8a">evidence</text>
-
-      <!-- SFU → Admin -->
-      <line x1="424" y1="84" x2="466" y2="84" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
-      <line x1="600" y1="84" x2="616" y2="84" stroke="#888" stroke-width="1.5" marker-end="url(#arr-ov)"/>
-      <line x1="466" y1="84" x2="600" y2="84" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
-      <!-- SFU -> Redis -->
-      <line x1="422" y1="68" x2="468" y2="68" stroke="#888" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arr-ov)"/>
-
-      <!-- LMS → Redis -->
-      <line x1="340" y1="164" x2="340" y2="144" stroke="#888" stroke-width="1.2" stroke-dasharray="2,2"/>
-      <path d="M340 144 L468 79" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arr-ov-r)"/>
-
-      <!-- LMS → Admin (score broadcast) -->
-      <line x1="424" y1="200" x2="614" y2="110" stroke="#1a6b3c" stroke-width="1.5" marker-end="url(#arr-ov-g)"/>
-      <text x="530" y="150" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#1a6b3c">Socket.IO</text>
-
-      <!-- LMS → DB -->
-      <line x1="422" y1="234" x2="468" y2="234" stroke="#1a3a6b" stroke-width="1.5" marker-end="url(#arr-ov-b)"/>
-
-      <!-- LMS → Queue -->
-      <line x1="340" y1="286" x2="340" y2="302" stroke="#6a1a8a" stroke-width="1.5" marker-end="url(#arr-ov)"/>
-
-    </svg>
-    <p class="diagram-caption">Figure 0 — Full production topology. Each student device hosts its own inference engine; the server's role is validation, persistence, and fan-out to the admin dashboard.</p>
+    <img src="./assets/images/Figure1.png" alt="Infra Diagram" width="100%" height="100%"/>
   </div>
 
   <!-- ════════ SECTION 1 ════════ -->
@@ -1026,42 +899,9 @@
     The initial implementation was what you would expect from a first attempt. One worker, one router, in-memory maps for transports, producers, consumers, and a pending consumer queue for the race condition where an admin tries to subscribe to a stream that has not been produced yet. The signaling flow was a series of socket events: join, get capabilities, create transport, connect transport, produce, consume.
   </p>
 
-  <!-- Architecture diagram: initial -->
-  <div class="diagram-wrap">
-    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
-      <!-- Student -->
-      <rect x="20" y="70" width="130" height="80" rx="8" fill="#e8edf5" stroke="#1a3a6b" stroke-width="1.5"/>
-      <text x="85" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a3a6b" font-weight="500">Student Browser</text>
-      <text x="85" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7aaa">Webcam + WebRTC</text>
-
-      <!-- SFU -->
-      <rect x="270" y="50" width="160" height="120" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="350" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">WebRTC SFU</text>
-      <text x="350" y="114" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">1 worker · 1 router</text>
-      <text x="350" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">In-memory state</text>
-      <text x="350" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">Port 5002</text>
-
-      <!-- Admin -->
-      <rect x="550" y="70" width="130" height="80" rx="8" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1.5"/>
-      <text x="615" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a6b3c" font-weight="500">Admin Dashboard</text>
-      <text x="615" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a8a5c">Consume streams</text>
-
-      <!-- arrows -->
-      <defs>
-        <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#888"/>
-        </marker>
-      </defs>
-      <line x1="152" y1="110" x2="268" y2="110" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="210" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#888">WebRTC produce</text>
-
-      <line x1="432" y1="110" x2="548" y2="110" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="490" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#888">WebRTC consume</text>
-
-      <!-- note -->
-      <text x="350" y="205" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#999" font-style="italic">No AI. No persistence. Just routing.</text>
-    </svg>
-    <p class="diagram-caption">Figure 1 — The initial architecture. Media flows from student to admin via the SFU. The server touches encoded packets but never decodes them.</p>
+  <!-- Figure 1: initial SFU — zone-based, generous spacing -->
+  <div class="diagram-wrap" style="padding: 0px;">
+    <img src="./assets/images/Figure2.png" alt="Initial system" width="100%" height="100%"/>
   </div>
 
   <p>
@@ -1091,63 +931,9 @@
     The signaling was a second WebSocket connection from the student browser, separate from the SFU signaling path. The student connected to a dedicated proctoring endpoint, sent an identity payload containing their student ID, quiz ID, and producer ID, and then completed a standard WebRTC offer-answer exchange with the Python process. The Python worker opened a receive-only peer connection, accepted the student's video track, and began pulling frames.
   </p>
 
-  <!-- Architecture diagram: server AI -->
-  <div class="diagram-wrap">
-    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
-      <defs>
-        <marker id="arr2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#888"/>
-        </marker>
-      </defs>
-
-      <!-- Student -->
-      <rect x="20" y="20" width="130" height="80" rx="8" fill="#e8edf5" stroke="#1a3a6b" stroke-width="1.5"/>
-      <text x="85" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a3a6b" font-weight="500">Student Browser</text>
-      <text x="85" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7aaa">2 WebRTC paths</text>
-      <text x="85" y="89" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7aaa">Media + AI stream</text>
-
-      <!-- SFU -->
-      <rect x="220" y="20" width="130" height="80" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="285" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">WebRTC SFU</text>
-      <text x="285" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">stream routing →</text>
-      <text x="285" y="89" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">Python worker</text>
-
-      <!-- Python Worker -->
-      <rect x="220" y="170" width="260" height="120" rx="8" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1.5"/>
-      <text x="350" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a6b3c" font-weight="500">Python AI Worker</text>
-      <text x="350" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">frame recv → color convert → resize</text>
-      <text x="350" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">Face Detection (MediaPipe)</text>
-      <text x="350" y="250" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">Face Mesh → gaze calculation</text>
-      <text x="350" y="266" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c0392b" font-weight="500">⚠ BLOCKING on main thread</text>
-
-      <!-- Redis -->
-      <rect x="550" y="100" width="120" height="60" rx="8" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
-      <text x="610" y="127" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#c62828" font-weight="500">Redis</text>
-      <text x="610" y="145" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c62828">TTL dedupe</text>
-
-      <!-- LMS -->
-      <rect x="550" y="200" width="120" height="60" rx="8" fill="#f3e5f5" stroke="#6a1a8a" stroke-width="1.5"/>
-      <text x="610" y="227" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#6a1a8a" font-weight="500">LMS Backend</text>
-      <text x="610" y="245" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6a1a8a">real-time scores</text>
-
-      <!-- arrows -->
-      <line x1="152" y1="42" x2="218" y2="42" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
-      <text x="185" y="36" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">produce</text>
-
-      <line x1="85" y1="102" x2="230" y2="170" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
-      <text x="130" y="148" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#c0392b">proctoring ws</text>
-
-      <line x1="482" y1="210" x2="548" y2="215" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
-      <text x="515" y="207" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">score events</text>
-
-      <line x1="482" y1="230" x2="548" y2="145" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
-      <text x="530" y="185" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">TTL check</text>
-
-      <!-- same server label -->
-      <rect x="10" y="155" width="700" height="170" rx="10" fill="none" stroke="#c0392b" stroke-width="1" stroke-dasharray="6,3"/>
-      <text x="640" y="175" font-family="DM Sans,sans-serif" font-size="11" fill="#c0392b" font-weight="500">Same server instance</text>
-    </svg>
-    <p class="diagram-caption">Figure 2 — Server-side AI architecture. The Python worker and SFU share the same server instance, creating CPU contention at scale.</p>
+  <!-- Figure 2: server-side AI architecture — zone-based, generous spacing -->
+  <div class="diagram-wrap" style="padding:0px;">
+    <img src="./assets/images/Figure3.png" alt="server-side-ai" width="100%" height="100%" />
   </div>
 
   <h3>The Frame Processing Pipeline</h3>
@@ -1161,7 +947,7 @@
       <span class="code-dot" style="background:#ff5f57"></span>
       <span class="code-dot" style="background:#ffbd2e"></span>
       <span class="code-dot" style="background:#28c840"></span>
-      <span>rtp_processor.py — the hot loop</span>
+      <span>frame processing — the hot loop (Python AI worker)</span>
     </div>
     <pre><span class="cm"># Every frame pulled from the track went through this path.</span>
 <span class="cm"># The critical insight: get_comprehensive_analysis() is BLOCKING.</span>
@@ -1191,7 +977,7 @@
   </div>
 
   <p>
-    The frame sampling gate — processing only 1 in every 5 frames — was an early concession to performance. Even at 1 FPS of actual analysis, the work per frame was substantial. MediaPipe face detection runs in 20–50ms. If a face is found, face mesh runs in an additional 30–80ms. Eye gaze calculation adds a few more milliseconds on top. In total, processing one frame blocks the Python event loop for 50–140ms depending on what is in the frame.
+    The frame sampling gate — processing only 1 in every 5 frames — was an early concession to performance. Even at 1 FPS of actual analysis, the work per frame was substantial. <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector" target="_blank" rel="noopener">MediaPipe Face Detection</a> runs in 20–50ms. If a face is found, <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker" target="_blank" rel="noopener">Face Landmarker</a> (which provides the 478-point facial mesh used for gaze estimation) runs in an additional 30–80ms. Eye gaze calculation adds a few more milliseconds on top. In total, processing one frame blocks the Python event loop for 50–140ms depending on what is in the frame.
   </p>
 
   <p>
@@ -1217,9 +1003,26 @@
     <p>"At four to five concurrent users, the server CPU hit 100% and stayed there. The SFU started dropping frames. The Python worker's heartbeats timed out. The entire system became unresponsive."</p>
   </div>
 
-  <div class="optimization-images">
-    <img src="./assets/images/EC2_before_snapshot.png" alt="Before optimizations EC2" height="350px">
+  <!-- EC2 evidence: real server screenshots -->
+  <p>
+    This was not a theoretical concern. The screenshots below are from the actual production EC2 instance — <code>htop</code> output captured during the failure and then again after the architecture change was deployed. The contrast tells the whole story.
+  </p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:36px 0;">
+    <div style="border-radius:12px;overflow:hidden;border:1.5px solid #fecaca;background:#fef2f2;">
+      <div style="padding:12px 16px;background:#fef2f2;border-bottom:1px solid #fecaca;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#dc2626;">❌ Before — CPU at 65–68% per core at ~5 users</span>
+      </div>
+      <img src="./assets/images/EC2_before_snapshot.png" alt="EC2 htop showing high CPU utilization during server-side AI inference" style="width:100%;display:block;"/>
+    </div>
+    <div style="border-radius:12px;overflow:hidden;border:1.5px solid #bbf7d0;background:#f0fdf4;">
+      <div style="padding:12px 16px;background:#f0fdf4;border-bottom:1px solid #bbf7d0;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#15803d;">✅ After — CPU at 8–12% per core at 200+ sessions</span>
+      </div>
+      <img src="./assets/images/EC2_Optimized.png" alt="EC2 htop showing low CPU utilization after moving inference to client-side WASM" style="width:100%;display:block;"/>
+    </div>
   </div>
+  <p style="font-size:13px;color:var(--mid);text-align:center;font-style:italic;margin-top:-24px;margin-bottom:36px;">Real production EC2 instance metrics — before and after moving AI inference from the server to each student's browser.</p>
 
   <p>
     The root cause was not complicated once you understood the numbers. Each student stream was generating 1 analyzed frame per second. Each analysis was blocking the Python event loop for between 50 and 140 milliseconds. Two streams meant up to 280ms of blocking per second. Five streams meant up to 700ms. At that point, the Python process was spending more time blocked in MediaPipe inference than it had time available — the event loop was saturated before it could process incoming frames, emit scores, or respond to heartbeats.
@@ -1410,62 +1213,8 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </p>
 
   <!-- Architecture: client-side -->
-  <div class="diagram-wrap">
-    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
-      <defs>
-        <marker id="arr3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#888"/>
-        </marker>
-      </defs>
-
-      <!-- Student device -->
-      <rect x="10" y="20" width="230" height="240" rx="10" fill="#e8edf5" stroke="#1a3a6b" stroke-width="1.5"/>
-      <text x="125" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a3a6b" font-weight="500">Student Device</text>
-
-      <rect x="30" y="60" width="190" height="36" rx="6" fill="white" stroke="#99aac8" stroke-width="1"/>
-      <text x="125" y="82" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#1a3a6b">MediaPipe WASM</text>
-
-      <rect x="30" y="105" width="190" height="36" rx="6" fill="white" stroke="#99aac8" stroke-width="1"/>
-      <text x="125" y="127" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#1a3a6b">face_landmarker model</text>
-
-      <rect x="30" y="150" width="190" height="36" rx="6" fill="#fff3e0" stroke="#b36000" stroke-width="1"/>
-      <text x="125" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#7a4000">GPU delegate inference</text>
-
-      <rect x="30" y="196" width="190" height="48" rx="6" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1"/>
-      <text x="125" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c">Score + flags (real-time events)</text>
-      <text x="125" y="232" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c">Evidence JPEG (HTTP POST)</text>
-
-      <!-- SFU -->
-      <rect x="290" y="60" width="130" height="60" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="355" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7a4000" font-weight="500">WebRTC SFU</text>
-      <text x="355" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#a06000">Media routing only</text>
-
-      <!-- LMS Backend -->
-      <rect x="290" y="160" width="130" height="80" rx="8" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
-      <text x="355" y="188" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">LMS Backend</text>
-      <text x="355" y="206" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Validate + persist</text>
-      <text x="355" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Server-side dedup</text>
-
-      <!-- Storage + Admin -->
-      <rect x="480" y="60" width="110" height="50" rx="8" fill="#f3e5f5" stroke="#6a1a8a" stroke-width="1.5"/>
-      <text x="535" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Object Storage</text>
-      <text x="535" y="98" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Evidence frames</text>
-
-      <rect x="480" y="160" width="110" height="50" rx="8" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1.5"/>
-      <text x="535" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a6b3c" font-weight="500">Admin Dashboard</text>
-      <text x="535" y="198" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a6b3c">Scores + streams</text>
-
-      <!-- arrows -->
-      <line x1="152" y1="196" x2="288" y2="165" stroke="#1a3a6b" stroke-width="1.5" marker-end="url(#arr3)"/>
-      <line x1="152" y1="232" x2="288" y2="220" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr3)"/>
-      <line x1="222" y1="80" x2="288" y2="85" stroke="#888" stroke-width="1.5" marker-end="url(#arr3)"/>
-      <line x1="422" y1="85" x2="478" y2="85" stroke="#888" stroke-width="1.5" marker-end="url(#arr3)"/>
-      <line x1="422" y1="200" x2="478" y2="190" stroke="#888" stroke-width="1.5" marker-end="url(#arr3)"/>
-      <line x1="355" y1="162" x2="355" y2="122" stroke="#888" stroke-width="1.5" stroke-dasharray="3,2"/>
-
-      <text x="125" y="282" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a3a6b" font-style="italic">N students = N inference workers (free)</text>
-    </svg>
-    <p class="diagram-caption">Figure 3 — Client-side ML architecture. Each student's device runs MediaPipe inference locally. The server receives computed results, not raw frames.</p>
+  <div class="diagram-wrap" style="padding: 0px;">
+    <img src="./assets/images/Figure4.png" alt="Final architecture" width="100%" height="100%" />
   </div>
 
   <h3>Local Suppression and the Trust Boundary</h3>
