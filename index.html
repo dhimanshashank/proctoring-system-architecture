@@ -39,6 +39,85 @@
     font-weight: 300;
   }
 
+  /* ─── SCROLL PROGRESS BAR ────────────────────────────── */
+  #scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── STICKY READING HEADER ──────────────────────────── */
+  #reading-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: rgba(250,249,246,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transform: translateY(-100%);
+    transition: transform 0.28s ease;
+  }
+
+  #reading-header.visible {
+    transform: translateY(0);
+  }
+
+  .reading-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 480px;
+  }
+
+  .reading-header-section {
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .reading-header-nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .reading-header-nav::-webkit-scrollbar { display: none; }
+
+  .reading-header-nav a {
+    font-size: 11px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    padding: 4px 12px;
+    border-right: 1px solid var(--rule);
+    white-space: nowrap;
+    transition: color .2s;
+  }
+  .reading-header-nav a:last-child { border-right: none; }
+  .reading-header-nav a:hover { color: var(--accent); }
+  .reading-header-nav a.active { color: var(--accent); }
+
   /* ─── HEADER ─────────────────────────────────────────── */
   .masthead {
     background: var(--ink);
@@ -64,6 +143,12 @@
     width: 300px; height: 300px;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .header-only-image-preview {
+    background: "Gemini_Generated_Image_.png";
+    background-size: cover;
+    background-position: center
   }
 
   .container {
@@ -129,9 +214,6 @@
     background: #f0ede7;
     border-bottom: 1px solid var(--rule);
     padding: 20px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
   }
 
   .toc-inner {
@@ -158,7 +240,7 @@
   .toc-inner a:hover { color: var(--accent); }
 
   /* ─── ARTICLE BODY ────────────────────────────────────── */
-  .article-body { padding: 64px 0 80px; }
+  .article-body { padding: 64px 0 0px; }
 
   h2.section-title {
     font-family: 'Playfair Display', serif;
@@ -345,6 +427,73 @@
     font-style: italic;
   }
 
+  /* ─── BEFORE / AFTER COMPARE ─────────────────────────── */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ba-panel {
+    padding: 28px 28px 32px;
+  }
+
+  .ba-panel.before {
+    background: #fff5f4;
+    border-right: 1px solid var(--rule);
+  }
+
+  .ba-panel.after {
+    background: #f4faf7;
+  }
+
+  .ba-label {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .ba-panel.before .ba-label { color: var(--accent); }
+  .ba-panel.after .ba-label { color: var(--green); }
+
+  .ba-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .ba-list {
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--mid);
+  }
+
+  .ba-list li::before {
+    content: '—';
+    margin-right: 8px;
+    opacity: 0.5;
+  }
+
+  .ba-panel.before .ba-list li::before { color: var(--accent); }
+  .ba-panel.after .ba-list li::before { color: var(--green); opacity: 1; content: '✓'; }
+
+  .optimization-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
   /* ─── METRICS GRID ───────────────────────────────────── */
   .metrics-grid {
     display: grid;
@@ -375,6 +524,99 @@
     color: var(--mid);
     text-transform: uppercase;
     letter-spacing: .06em;
+  }
+
+  /* ─── RESULTS BLOCK ──────────────────────────────────── */
+  .results-block {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 40px 40px 44px;
+    margin: 48px 0;
+  }
+
+  .results-block-label {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .results-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 28px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 24px;
+  }
+
+  .result-item {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 16px;
+  }
+
+  .result-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    color: #6fcf97;
+    margin-bottom: 6px;
+  }
+
+  .result-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    letter-spacing: .03em;
+  }
+
+  /* ─── LESSON CARDS ───────────────────────────────────── */
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .lesson-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  .lesson-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: .1em;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .lesson-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .lesson-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mid);
+    margin: 0;
   }
 
   /* ─── PHASE TIMELINE ─────────────────────────────────── */
@@ -440,6 +682,21 @@
     margin: 48px 0;
   }
 
+  /* ─── CUSTOM SCROLLBAR ───────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0ede7;
+  }
+
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c0392b #f0ede7;
+  }
+
   /* ─── FOOTER ─────────────────────────────────────────── */
   footer {
     background: var(--ink);
@@ -452,32 +709,51 @@
   footer strong { color: rgba(255,255,255,0.7); font-weight: 400; }
 
   /* ─── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 700px) {
+    .before-after { grid-template-columns: 1fr; }
+    .ba-panel.before { border-right: none; border-bottom: 1px solid var(--rule); }
+    .lesson-grid { grid-template-columns: 1fr; }
+    #reading-header { display: none; }
+  }
+
   @media (max-width: 600px) {
     .masthead { padding: 56px 0 48px; }
     h2.section-title { font-size: 26px; }
     .container { padding: 0 20px; }
     pre { font-size: 12px; }
     .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  /* ─── PRINT / EXPORT NOTE ────────────────────────────── */
-  .export-tip {
-    background: var(--highlight);
-    border: 1px solid #e0c84a;
-    border-radius: 8px;
-    padding: 14px 20px;
-    font-size: 14px;
-    color: #5a4a00;
-    text-align: center;
-    margin-bottom: 32px;
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 
+<!-- ─── SCROLL PROGRESS ─── -->
+<div id="scroll-progress"></div>
+
+<!-- ─── READING HEADER (appears after hero scrolls away) ─── -->
+<div id="reading-header">
+  <div style="display:flex;align-items:center;gap:16px;min-width:0">
+    <div class="reading-header-title">AI Proctoring System — Architecture Deep Dive</div>
+    <div class="reading-header-section" id="active-section-label"></div>
+  </div>
+  <nav class="reading-header-nav">
+    <a href="#origin">Origin</a>
+    <a href="#streaming">Streaming</a>
+    <a href="#server-ai">Server AI</a>
+    <a href="#collapse">Collapse</a>
+    <a href="#shift">Architecture Shift</a>
+    <a href="#client-ml">Client ML</a>
+    <a href="#admin-dashboard">Admin Dashboard</a>
+    <a href="#results">Results</a>
+    <a href="#lessons">Lessons</a>
+  </nav>
+</div>
+
 <!-- ════════════════════════════ MASTHEAD ════════════════════════════ -->
-<header class="masthead">
+<header class="masthead" id="masthead">
   <div class="container">
+    <div class="header-only-image-preview"></div>
     <span class="label">Deep Dive · Real-Time Systems · AI Engineering</span>
     <h1 class="headline">
       How We Built a<br>
@@ -486,7 +762,7 @@
       It Collapse at Five Users
     </h1>
     <p class="deck">
-      A frank engineering post-mortem on building video proctoring from a single streaming server to a client-side WebAssembly inference architecture that scales to hundreds of simultaneous exam sessions.
+      A deep engineering post-mortem on scaling a WebRTC-based AI proctoring platform from a fragile single-server prototype to a distributed browser-side inference architecture supporting 300+ concurrent exam sessions.
     </p>
     <div class="byline">
       <span>Shashank Dhiman</span>
@@ -495,7 +771,7 @@
       <span class="byline-dot">·</span>
       <span>2025</span>
       <span class="byline-dot">·</span>
-      <span>22 min read</span>
+      <span>24 min read</span>
     </div>
   </div>
 </header>
@@ -510,7 +786,8 @@
       <a href="#collapse">The Collapse</a>
       <a href="#shift">Architecture Shift</a>
       <a href="#client-ml">Client-Side ML</a>
-      <a href="#liveview">Admin LiveView</a>
+      <a href="#admin-dashboard">Admin Dashboard</a>
+      <a href="#results">Results</a>
       <a href="#lessons">Lessons</a>
     </div>
   </div>
@@ -522,11 +799,11 @@
 
   <!-- intro -->
   <p style="font-size:21px; line-height:1.75; font-weight:300; color:#2a2a2a; margin-bottom:32px;">
-    There is a particular kind of failure that only reveals itself under real load. The architecture looks clean on a whiteboard, the tests pass, and the demo goes smoothly. Then five students join an online exam simultaneously, and your EC2 instance's CPU climbs to one hundred percent and stays there.
+    There is a particular kind of failure that only reveals itself under real load. The architecture looks clean on a whiteboard, the tests pass, and the demo goes smoothly. Then five students join an online exam simultaneously, and your server's CPU climbs to one hundred percent and stays there.
   </p>
 
   <p>
-    This is the story of building a video proctoring system for a live LMS platform — from a single WebRTC node handling a handful of streams, to a server-side Python AI worker drowning under the weight of its own ambition, to a fundamental rethink that moved the intelligence from the server into each student's browser using WebAssembly. It covers what broke, why it broke, and the decisions that came out of each failure.
+    This is the story of building a video proctoring system for a live learning platform — from a single WebRTC node handling a handful of streams, to a server-side Python AI worker drowning under the weight of its own ambition, to a fundamental rethink that moved the intelligence from the server into each student's browser using WebAssembly. It covers what broke, why it broke, and the decisions that came out of each failure.
   </p>
 
   <p>
@@ -534,6 +811,145 @@
   </p>
 
   <div class="divider"></div>
+
+  <!-- ════════ FULL ARCHITECTURE OVERVIEW ════════ -->
+  <h3 style="margin-top:0">Full System Topology</h3>
+  <p>
+    Before diving into each failure and fix, here is the complete production architecture as it stands today — after all the refactors described in this post. This is the reference frame for everything that follows.
+  </p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 740 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;display:block;margin:0 auto">
+      <defs>
+        <marker id="arr-ov" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#888"/>
+        </marker>
+        <marker id="arr-ov-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#1a6b3c"/>
+        </marker>
+        <marker id="arr-ov-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#1a3a6b"/>
+        </marker>
+        <marker id="arr-ov-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#c0392b"/>
+        </marker>
+      </defs>
+
+      <!-- Background zones -->
+      <rect x="8" y="8" width="218" height="400" rx="10" fill="#e8edf5" stroke="#1a3a6b" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
+      <text x="117" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a3a6b" letter-spacing="0.1em" font-weight="500" text-transform="uppercase">STUDENT DEVICES (N)</text>
+
+      <rect x="240" y="8" width="200" height="400" rx="10" fill="#fff8f0" stroke="#b36000" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
+      <text x="340" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7a4000" letter-spacing="0.1em" font-weight="500">MEDIA LAYER</text>
+
+      <rect x="454" y="8" width="280" height="400" rx="10" fill="#f0f5f0" stroke="#1a6b3c" stroke-width="1" stroke-dasharray="5,3" opacity="0.5"/>
+      <text x="594" y="26" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a6b3c" letter-spacing="0.1em" font-weight="500">BACKEND + ADMIN</text>
+
+      <!-- Student device box -->
+      <rect x="22" y="44" width="190" height="260" rx="8" fill="white" stroke="#1a3a6b" stroke-width="1.5"/>
+      <text x="117" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a3a6b" font-weight="500">Student Browser</text>
+      <rect x="38" y="76" width="158" height="30" rx="5" fill="#e8edf5" stroke="#99aac8" stroke-width="1"/>
+      <text x="117" y="96" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a3a6b">Webcam Capture</text>
+      <rect x="38" y="116" width="158" height="30" rx="5" fill="#fff3e0" stroke="#b36000" stroke-width="1"/>
+      <text x="117" y="136" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#7a4000">MediaPipe WASM</text>
+      <rect x="38" y="156" width="158" height="30" rx="5" fill="#e8edf5" stroke="#99aac8" stroke-width="1"/>
+      <text x="117" y="176" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a3a6b">Face Landmarker (GPU)</text>
+      <rect x="38" y="196" width="158" height="30" rx="5" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1"/>
+      <text x="117" y="216" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#1a6b3c">Violation Scoring</text>
+      <rect x="38" y="236" width="158" height="58" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="1"/>
+      <text x="117" y="257" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Score + flags → Socket.IO</text>
+      <text x="117" y="273" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Evidence JPEG → HTTP</text>
+      <text x="117" y="289" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">WebRTC stream → SFU</text>
+
+      <!-- Multiple students indicator -->
+      <rect x="28" y="320" width="178" height="60" rx="6" fill="white" stroke="#1a3a6b" stroke-width="1" opacity="0.6"/>
+      <text x="117" y="356" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a3a6b" font-style="italic">N × same device topology</text>
+      <text x="117" y="373" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#888">Each contributes its own compute</text>
+
+      <!-- SFU -->
+      <rect x="258" y="44" width="164" height="100" rx="8" fill="white" stroke="#b36000" stroke-width="1.5"/>
+      <text x="340" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7a4000" font-weight="500">WebRTC SFU</text>
+      <text x="340" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#a06000">Selective Forwarding Unit</text>
+      <text x="340" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#a06000">RTP routing only</text>
+      <text x="340" y="118" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#a06000">Multi-worker · Port 5002</text>
+
+      <!-- LMS Backend -->
+      <rect x="258" y="164" width="164" height="120" rx="8" fill="white" stroke="#c62828" stroke-width="1.5"/>
+      <text x="340" y="188" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">LMS Backend</text>
+      <text x="340" y="206" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Score validation</text>
+      <text x="340" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Redis dedup (server-side)</text>
+      <text x="340" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Socket.IO broadcast</text>
+      <text x="340" y="254" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Report generation queue</text>
+
+      <!-- Queue -->
+      <rect x="258" y="304" width="164" height="60" rx="8" fill="white" stroke="#6a1a8a" stroke-width="1.5"/>
+      <text x="340" y="328" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Job Queue</text>
+      <text x="340" y="346" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Async report + webhook</text>
+
+      <!-- Redis -->
+      <rect x="470" y="44" width="130" height="70" rx="8" fill="white" stroke="#c62828" stroke-width="1.5"/>
+      <text x="535" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">Redis</text>
+      <text x="535" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">TTL dedup · violation counts</text>
+      <text x="535" y="102" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#c62828">session:{quiz}:{student}</text>
+
+      <!-- S3 -->
+      <rect x="470" y="134" width="130" height="60" rx="8" fill="white" stroke="#6a1a8a" stroke-width="1.5"/>
+      <text x="535" y="158" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Object Storage</text>
+      <text x="535" y="176" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Evidence frames (JPEG)</text>
+
+      <!-- DB -->
+      <rect x="470" y="214" width="130" height="60" rx="8" fill="white" stroke="#1a3a6b" stroke-width="1.5"/>
+      <text x="535" y="238" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a3a6b" font-weight="500">Database</text>
+      <text x="535" y="256" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a3a6b">Violation reports</text>
+
+      <!-- Admin Dashboard -->
+      <rect x="618" y="44" width="104" height="160" rx="8" fill="white" stroke="#1a6b3c" stroke-width="1.5"/>
+      <text x="670" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c" font-weight="500">Admin</text>
+      <text x="670" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c" font-weight="500">Dashboard</text>
+      <text x="670" y="108" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Virtual grid</text>
+      <text x="670" y="124" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Score store</text>
+      <text x="670" y="140" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Stream budget</text>
+      <text x="670" y="156" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">Phase model</text>
+      <text x="670" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#3a8a5c">useSyncExtStore</text>
+      <text x="670" y="193" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888">WebRTC streams ↑</text>
+
+      <!-- Arrows -->
+      <!-- Student → SFU (media) -->
+      <line x1="214" y1="90" x2="256" y2="85" stroke="#b36000" stroke-width="1.5" marker-end="url(#arr-ov)"/>
+      <text x="235" y="80" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#b36000">WebRTC</text>
+
+      <!-- Student → LMS (scores) -->
+      <line x1="214" y1="248" x2="256" y2="220" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr-ov-r)"/>
+      <text x="228" y="240" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#c0392b">scores</text>
+
+      <!-- Student → S3 (evidence) -->
+      <path d="M214 268 Q270 268 270 194 L468 160" stroke="#6a1a8a" stroke-width="1.2" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-ov)"/>
+      <text x="330" y="258" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#6a1a8a">evidence</text>
+
+      <!-- SFU → Admin -->
+      <line x1="424" y1="84" x2="466" y2="84" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
+      <line x1="600" y1="84" x2="616" y2="84" stroke="#888" stroke-width="1.5" marker-end="url(#arr-ov)"/>
+      <line x1="466" y1="84" x2="600" y2="84" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
+      <!-- SFU -> Redis -->
+      <line x1="422" y1="68" x2="468" y2="68" stroke="#888" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arr-ov)"/>
+
+      <!-- LMS → Redis -->
+      <line x1="340" y1="164" x2="340" y2="144" stroke="#888" stroke-width="1.2" stroke-dasharray="2,2"/>
+      <path d="M340 144 L468 79" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arr-ov-r)"/>
+
+      <!-- LMS → Admin (score broadcast) -->
+      <line x1="424" y1="200" x2="614" y2="110" stroke="#1a6b3c" stroke-width="1.5" marker-end="url(#arr-ov-g)"/>
+      <text x="530" y="150" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#1a6b3c">Socket.IO</text>
+
+      <!-- LMS → DB -->
+      <line x1="422" y1="234" x2="468" y2="234" stroke="#1a3a6b" stroke-width="1.5" marker-end="url(#arr-ov-b)"/>
+
+      <!-- LMS → Queue -->
+      <line x1="340" y1="286" x2="340" y2="302" stroke="#6a1a8a" stroke-width="1.5" marker-end="url(#arr-ov)"/>
+
+    </svg>
+    <p class="diagram-caption">Figure 0 — Full production topology. Each student device hosts its own inference engine; the server's role is validation, persistence, and fan-out to the admin dashboard.</p>
+  </div>
 
   <!-- ════════ SECTION 1 ════════ -->
   <h2 class="section-title" id="origin">
@@ -551,11 +967,11 @@
 
   <div class="callout info">
     <span class="callout-title">What "real-time" means here</span>
-    In this context, real-time means suspicion scores must update on the admin dashboard within 2–3 seconds of a violation occurring. Warning popups to students must arrive within that same window. The entire pipeline — frame capture, AI inference, Redis deduplication, Socket.IO emission, and frontend render — has to complete inside that budget, continuously, for every active stream.
+    In this context, real-time means suspicion scores must update on the admin dashboard within 2–3 seconds of a violation occurring. Warning popups to students must arrive within that same window. The entire pipeline — frame capture, AI inference, deduplication, event emission, and frontend render — has to complete inside that budget, continuously, for every active stream.
   </div>
 
   <p>
-    The system needed to detect eight distinct violation types, each with its own severity weighting and Redis TTL for deduplication. The final proctoring score needed to be a tiered model with hard caps per severity band — not just a raw sum — because the difference between "looked away twice" and "had someone else sit the exam" matters enormously in how you act on the data.
+    The system needed to detect eight distinct violation types, each with its own severity weighting and TTL for deduplication. The final proctoring score needed to be a tiered model with hard caps per severity band — not just a raw sum — because the difference between "looked away twice" and "had someone else sit the exam" matters enormously in how you act on the data.
   </p>
 
   <!-- timeline -->
@@ -564,13 +980,13 @@
       <div class="timeline-dot"></div>
       <div class="timeline-phase">Phase 1</div>
       <div class="timeline-title">One server, one router, no AI</div>
-      <div class="timeline-desc">A Mediasoup SFU routing WebRTC streams. Students produce, admins consume. The question of what to do with the video is deferred.</div>
+      <div class="timeline-desc">A Selective Forwarding Unit routing WebRTC streams. Students produce, admins consume. The question of what to do with the video is deferred.</div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot"></div>
       <div class="timeline-phase">Phase 2</div>
       <div class="timeline-title">Python worker, server-side MediaPipe</div>
-      <div class="timeline-desc">The AI arrives. A Python process pulls frames from each student stream using aiortc, runs MediaPipe inference, and emits scores over Socket.IO.</div>
+      <div class="timeline-desc">The AI arrives. A Python process pulls frames from each student stream via a secondary WebRTC path, runs MediaPipe inference, and emits scores over a real-time channel.</div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot"></div>
@@ -587,7 +1003,7 @@
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--green); box-shadow:0 0 0 2px var(--green)"></div>
       <div class="timeline-phase" style="color:var(--green)">Phase 5</div>
-      <div class="timeline-title">Admin LiveView scale refactor</div>
+      <div class="timeline-title">Admin dashboard scale refactor</div>
       <div class="timeline-desc">Virtual grids, external score stores, stream budgets, and phase-gated attach logic to support hundreds of concurrent tiles without melting the browser.</div>
     </div>
   </div>
@@ -595,7 +1011,7 @@
   <!-- ════════ SECTION 2 ════════ -->
   <h2 class="section-title" id="streaming">
     <span class="num">02 —</span>
-    The Streaming Server: Learning Mediasoup the Hard Way
+    The Streaming Server: Learning the SFU the Hard Way
   </h2>
 
   <p>
@@ -603,11 +1019,11 @@
   </p>
 
   <p>
-    <strong>Mediasoup</strong> is a Selective Forwarding Unit — an SFU — which means it sits between producers (students with webcams) and consumers (admins watching tiles) and routes encoded media without decoding it. This is the right architecture for video conferencing at scale: decoding and re-encoding on the server is expensive, and an SFU avoids it entirely. But Mediasoup has a learning curve that is almost entirely about state management.
+    A <strong>Selective Forwarding Unit</strong> sits between producers (students with webcams) and consumers (admins watching tiles) and routes encoded media without decoding it. This is the right architecture for video conferencing at scale: decoding and re-encoding on the server is expensive, and an SFU avoids it entirely. But an SFU has a learning curve that is almost entirely about state management.
   </p>
 
   <p>
-    The initial implementation was what you would expect from a first attempt. One worker, one router, in-memory JavaScript maps for transports, producers, consumers, and a pending consumer queue for the race condition where an admin tries to subscribe to a stream that has not been produced yet. The signaling flow was a series of socket events: <code>join_quiz</code>, <code>getRtpCapabilities</code>, <code>createWebRtcTransport</code>, <code>connectWebRtcTransport</code>, <code>produce</code>, <code>consume</code>.
+    The initial implementation was what you would expect from a first attempt. One worker, one router, in-memory maps for transports, producers, consumers, and a pending consumer queue for the race condition where an admin tries to subscribe to a stream that has not been produced yet. The signaling flow was a series of socket events: join, get capabilities, create transport, connect transport, produce, consume.
   </p>
 
   <!-- Architecture diagram: initial -->
@@ -620,7 +1036,7 @@
 
       <!-- SFU -->
       <rect x="270" y="50" width="160" height="120" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="350" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">Mediasoup SFU</text>
+      <text x="350" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">WebRTC SFU</text>
       <text x="350" y="114" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">1 worker · 1 router</text>
       <text x="350" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">In-memory state</text>
       <text x="350" y="148" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">Port 5002</text>
@@ -649,16 +1065,16 @@
   </div>
 
   <p>
-    The first real lesson came from the race condition inherent in WebRTC session setup. An admin loading the live dashboard might try to consume a student's stream before the student's <code>produce</code> call has completed — or, more insidiously, before Mediasoup has acknowledged it and propagated the producer ID. The pending consumer queue was the fix: store the consume request, and fulfil it the moment the producer materialises.
+    The first real lesson came from the race condition inherent in WebRTC session setup. An admin loading the live dashboard might try to consume a student's stream before the student's produce call has completed — or, more insidiously, before the SFU has acknowledged it and propagated the producer ID. The pending consumer queue was the fix: store the consume request, and fulfil it the moment the producer materialises.
   </p>
 
   <p>
-    The second lesson came from transport lifecycle. Mediasoup transports are not TCP connections — they are stateful objects that must be explicitly connected (via DTLS parameters), explicitly produced, and explicitly closed. Forgetting to close a transport on disconnect does not crash anything immediately. It leaks state quietly until you run out of file descriptors or memory. In-memory maps have to be cleaned up on socket disconnect, and that cleanup has to happen before any reconnect logic runs, not after.
+    The second lesson came from transport lifecycle. SFU transports are stateful objects that must be explicitly connected, explicitly produced, and explicitly closed. Forgetting to close a transport on disconnect does not crash anything immediately. It leaks state quietly until you run out of file descriptors or memory. In-memory maps have to be cleaned up on socket disconnect, and that cleanup has to happen before any reconnect logic runs, not after.
   </p>
 
   <div class="callout warn">
     <span class="callout-title">The pending consumer trap</span>
-    If you do not handle the case where an admin consumes before the student has produced, you will see silent failures on the dashboard with no error in your logs. The WebRTC negotiation simply never completes, and the tile shows a loader indefinitely. This exact failure mode came back later in a different form — the black-screen problem in the LiveView refactor — but its root cause was the same: the stream lifecycle is asynchronous and the consumer setup must wait for confirmed producer readiness.
+    If you do not handle the case where an admin consumes before the student has produced, you will see silent failures on the dashboard with no error in your logs. The WebRTC negotiation simply never completes, and the tile shows a loader indefinitely. This exact failure mode came back later in a different form — the black-screen problem in the admin dashboard refactor — but its root cause was the same: the stream lifecycle is asynchronous and the consumer setup must wait for confirmed producer readiness.
   </div>
 
   <!-- ════════ SECTION 3 ════════ -->
@@ -668,11 +1084,11 @@
   </h2>
 
   <p>
-    Once the WebRTC routing was stable, the AI layer was built on top of it. The design was architecturally clean and computationally naive: a Python process would receive each student's video stream via <strong>aiortc</strong> — a Python WebRTC implementation — sample frames at 1 FPS, run MediaPipe inference on each frame to detect violations, and emit scores back over Socket.IO.
+    Once the WebRTC routing was stable, the AI layer was built on top of it. The design was architecturally clean and computationally naive: a Python process would receive each student's video stream via a secondary WebRTC path, sample frames at 1 FPS, run MediaPipe inference on each frame to detect violations, and emit scores back over a real-time channel.
   </p>
 
   <p>
-    The signaling was a second WebSocket connection from the student browser, separate from the Mediasoup signaling path. The student connected to <code>/proctoring/ws</code>, sent an identity payload containing their student ID, quiz ID, and producer ID, and then completed a standard WebRTC offer-answer exchange with the Python process. The Python worker opened a receive-only peer connection, accepted the student's video track, and began pulling frames with <code>track.recv()</code>.
+    The signaling was a second WebSocket connection from the student browser, separate from the SFU signaling path. The student connected to a dedicated proctoring endpoint, sent an identity payload containing their student ID, quiz ID, and producer ID, and then completed a standard WebRTC offer-answer exchange with the Python process. The Python worker opened a receive-only peer connection, accepted the student's video track, and began pulling frames.
   </p>
 
   <!-- Architecture diagram: server AI -->
@@ -692,16 +1108,16 @@
 
       <!-- SFU -->
       <rect x="220" y="20" width="130" height="80" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="285" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">Mediasoup SFU</text>
-      <text x="285" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">assign_stream →</text>
+      <text x="285" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#7a4000" font-weight="500">WebRTC SFU</text>
+      <text x="285" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">stream routing →</text>
       <text x="285" y="89" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a06000">Python worker</text>
 
       <!-- Python Worker -->
       <rect x="220" y="170" width="260" height="120" rx="8" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1.5"/>
       <text x="350" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#1a6b3c" font-weight="500">Python AI Worker</text>
-      <text x="350" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">aiortc recv → BGR → resize</text>
-      <text x="350" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">MediaPipe FaceDetection</text>
-      <text x="350" y="250" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">FaceMesh → gaze calc</text>
+      <text x="350" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">frame recv → color convert → resize</text>
+      <text x="350" y="234" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">Face Detection (MediaPipe)</text>
+      <text x="350" y="250" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#3a6a4c">Face Mesh → gaze calculation</text>
       <text x="350" y="266" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c0392b" font-weight="500">⚠ BLOCKING on main thread</text>
 
       <!-- Redis -->
@@ -712,14 +1128,14 @@
       <!-- LMS -->
       <rect x="550" y="200" width="120" height="60" rx="8" fill="#f3e5f5" stroke="#6a1a8a" stroke-width="1.5"/>
       <text x="610" y="227" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#6a1a8a" font-weight="500">LMS Backend</text>
-      <text x="610" y="245" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6a1a8a">Socket.IO scores</text>
+      <text x="610" y="245" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6a1a8a">real-time scores</text>
 
       <!-- arrows -->
       <line x1="152" y1="42" x2="218" y2="42" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
       <text x="185" y="36" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">produce</text>
 
       <line x1="85" y1="102" x2="230" y2="170" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
-      <text x="130" y="148" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#c0392b">/proctoring/ws</text>
+      <text x="130" y="148" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#c0392b">proctoring ws</text>
 
       <line x1="482" y1="210" x2="548" y2="215" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
       <text x="515" y="207" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">score events</text>
@@ -727,17 +1143,17 @@
       <line x1="482" y1="230" x2="548" y2="145" stroke="#888" stroke-width="1.5" marker-end="url(#arr2)"/>
       <text x="530" y="185" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#888">TTL check</text>
 
-      <!-- same EC2 label -->
+      <!-- same server label -->
       <rect x="10" y="155" width="700" height="170" rx="10" fill="none" stroke="#c0392b" stroke-width="1" stroke-dasharray="6,3"/>
-      <text x="640" y="175" font-family="DM Sans,sans-serif" font-size="11" fill="#c0392b" font-weight="500">Same EC2 instance</text>
+      <text x="640" y="175" font-family="DM Sans,sans-serif" font-size="11" fill="#c0392b" font-weight="500">Same server instance</text>
     </svg>
-    <p class="diagram-caption">Figure 2 — Server-side AI architecture. The Python worker and Mediasoup SFU share the same EC2 instance, creating CPU contention at scale.</p>
+    <p class="diagram-caption">Figure 2 — Server-side AI architecture. The Python worker and SFU share the same server instance, creating CPU contention at scale.</p>
   </div>
 
   <h3>The Frame Processing Pipeline</h3>
 
   <p>
-    For every frame the Python worker processed, the pipeline looked like this. First, <code>aiortc</code> delivered a raw video frame from the WebRTC receive track. That frame was converted from YUV to BGR using OpenCV, resized to 640×360, and passed to the MediaPipe analysis pipeline. MediaPipe ran face detection first, then face mesh if a face was found, then gaze angle calculation from the facial landmarks. The result was a set of violation flags and a suspicion score.
+    For every frame the Python worker processed, the pipeline looked like this. First, the runtime delivered a raw video frame from the WebRTC receive track. That frame was converted from YUV to BGR, resized to 640×360, and passed to the MediaPipe analysis pipeline. MediaPipe ran face detection first, then face mesh if a face was found, then gaze angle calculation from the facial landmarks. The result was a set of violation flags and a suspicion score.
   </p>
 
   <div class="code-block">
@@ -745,9 +1161,9 @@
       <span class="code-dot" style="background:#ff5f57"></span>
       <span class="code-dot" style="background:#ffbd2e"></span>
       <span class="code-dot" style="background:#28c840"></span>
-      <span>webrtc_processor.py — the hot loop</span>
+      <span>rtp_processor.py — the hot loop</span>
     </div>
-    <pre><span class="cm"># Every frame pulled from the aiortc track went through this path.</span>
+    <pre><span class="cm"># Every frame pulled from the track went through this path.</span>
 <span class="cm"># The critical insight: get_comprehensive_analysis() is BLOCKING.</span>
 <span class="cm"># While it runs, no other stream can be processed.</span>
 
@@ -765,7 +1181,7 @@
         engine.get_comprehensive_analysis, bgr
     )
 
-    <span class="cm"># For each violation detected: 2 Redis calls + optional S3</span>
+    <span class="cm"># For each violation detected: 2 Redis calls + optional upload</span>
     <span class="kw">for</span> flag <span class="kw">in</span> analysis[<span class="str">'flags'</span>]:
         exists = <span class="kw">await</span> check_short_violation_key(quiz_id, student_id, flag)
         <span class="kw">if not</span> exists:
@@ -779,12 +1195,12 @@
   </p>
 
   <p>
-    The Redis deduplication strategy was sound in design. Each violation type gets a Redis key with a per-type TTL — 45 seconds for multiple faces, 30 seconds for a missing face, 15 seconds for a camera blackout. While the key exists, identical violations are suppressed. When the TTL expires, the violation can fire again. This prevents a student in a dark room from accumulating an infinite score from hundreds of low-brightness frames within a minute.
+    The deduplication strategy was sound in design. Each violation type gets a cache key with a per-type TTL — 45 seconds for multiple faces, 30 seconds for a missing face, 15 seconds for a camera blackout. While the key exists, identical violations are suppressed. When the TTL expires, the violation can fire again. This prevents a student in a dark room from accumulating an infinite score from hundreds of low-brightness frames within a minute.
   </p>
 
   <div class="callout info">
     <span class="callout-title">The N+1 problem in a proctoring pipeline</span>
-    For each analyzed frame, the system made 2N+1 Redis calls, where N is the number of active violations in that frame. With three simultaneous violations, that is 7 Redis round-trips per analyzed frame — 7 calls per second per student stream. At 10 concurrent students, that is 70 Redis calls per second just for violation tracking, before any other backend work.
+    For each analyzed frame, the system made 2N+1 cache round-trips, where N is the number of active violations in that frame. With three simultaneous violations, that is 7 round-trips per analyzed frame — 7 calls per second per student stream. At 10 concurrent students, that is 70 operations per second just for violation tracking, before any other backend work.
   </div>
 
   <!-- ════════ SECTION 4 ════════ -->
@@ -794,21 +1210,25 @@
   </h2>
 
   <p>
-    The first real deployment was on a single EC2 instance running both the Mediasoup SFU and the Python AI worker. In development and small demos, this was fine. The problems appeared the moment multiple exam sessions ran simultaneously.
+    The first real deployment was on a single server instance running both the SFU and the Python AI worker. In development and small demos, this was fine. The problems appeared the moment multiple exam sessions ran simultaneously.
   </p>
 
   <div class="pullquote">
-    <p>"At four to five concurrent users, the EC2 CPU hit 100% and stayed there. The Mediasoup SFU started dropping frames. The Python worker's Socket.IO heartbeats timed out. The entire system became unresponsive."</p>
+    <p>"At four to five concurrent users, the server CPU hit 100% and stayed there. The SFU started dropping frames. The Python worker's heartbeats timed out. The entire system became unresponsive."</p>
+  </div>
+
+  <div class="optimization-images">
+    <img src="./assets/images/EC2_before_snapshot.png" alt="Before optimizations EC2" height="350px">
   </div>
 
   <p>
-    The root cause was not complicated once you understood the numbers. Each student stream was generating 1 analyzed frame per second. Each analysis was blocking the Python event loop for between 50 and 140 milliseconds. Two streams meant up to 280ms of blocking per second. Five streams meant up to 700ms. At that point, the Python process was spending more time blocked in MediaPipe inference than it had time available — the event loop was saturated before it could process incoming frames, emit scores, or respond to Socket.IO heartbeats.
+    The root cause was not complicated once you understood the numbers. Each student stream was generating 1 analyzed frame per second. Each analysis was blocking the Python event loop for between 50 and 140 milliseconds. Two streams meant up to 280ms of blocking per second. Five streams meant up to 700ms. At that point, the Python process was spending more time blocked in MediaPipe inference than it had time available — the event loop was saturated before it could process incoming frames, emit scores, or respond to heartbeats.
   </p>
 
   <!-- CPU utilization chart -->
   <div class="chart-section">
     <div class="chart-title">CPU Utilization vs Concurrent Users</div>
-    <div class="chart-subtitle">Server-side inference (Python + Mediasoup on shared EC2). Each additional student adds ~140ms of blocking AI work per second.</div>
+    <div class="chart-subtitle">Server-side inference on a shared server instance. Each additional student adds ~140ms of blocking AI work per second.</div>
     <div class="chart-wrap" style="height:280px">
       <canvas id="cpuChart" role="img" aria-label="Line chart showing CPU utilization rising sharply from 18% at 1 user to 100% at 5 users with server-side architecture">CPU utilization: 1 user 18%, 2 users 35%, 3 users 55%, 4 users 80%, 5 users 100%, then system failure.</canvas>
     </div>
@@ -821,7 +1241,7 @@
   <h3>Why Co-location Made It Worse</h3>
 
   <p>
-    Running Mediasoup and the Python AI worker on the same instance created a CPU contention problem that compounded the individual bottlenecks. Mediasoup is a native C++ library that is CPU-intensive during WebRTC negotiation and RTP routing. The Python worker was consuming CPU through MediaPipe inference and numpy operations. When both peaked simultaneously — which they always did, because new students joining an exam trigger both WebRTC negotiation and new AI stream setup at the same time — the instance had no headroom.
+    Running the AI worker and the media server on the same instance created a CPU contention problem that compounded the individual bottlenecks. The SFU is CPU-intensive during WebRTC negotiation and RTP routing. The Python worker was consuming CPU through MediaPipe inference and array operations. When both peaked simultaneously — which they always did, because new students joining an exam trigger both WebRTC negotiation and new AI stream setup at the same time — the instance had no headroom.
   </p>
 
   <!-- Per-frame cost breakdown chart -->
@@ -833,29 +1253,29 @@
     </div>
   </div>
 
-  <h3>The isStreaming Sticky Bug</h3>
+  <h3>The Sticky State Bug</h3>
 
   <p>
-    The CPU saturation was the most visible failure, but not the only one. Under load, a subtle state management bug in the session tracker surfaced. The <code>upsertQuizSession</code> function was designed to update session state incrementally — only changing the fields present in the incoming delta payload. The bug was that when a student disconnected and the delta included <code>isStreaming: false</code>, the function was treating that as "no streaming field provided" and preserving the previous <code>true</code> value. The session stayed marked as streaming even after the student had left.
+    The CPU saturation was the most visible failure, but not the only one. Under load, a subtle state management bug in the session tracker surfaced. The session update function was designed to update state incrementally — only changing the fields present in the incoming delta payload. The bug was that when a student disconnected and the delta included <code>isStreaming: false</code>, the function was treating that as "no streaming field provided" and preserving the previous <code>true</code> value. The session stayed marked as streaming even after the student had left.
   </p>
 
   <p>
-    This caused the admin dashboard to show active stream tiles for students who were no longer connected. Admins saw non-zero counts of active streams, Mediasoup tried to serve consumers for producers that no longer existed, and the error logs filled with consumer creation failures. The fix was a single conditional: only preserve an existing boolean value when the incoming delta explicitly omits the field — not when it provides <code>false</code>.
+    This caused the admin dashboard to show active stream tiles for students who were no longer connected. Admins saw non-zero counts of active streams, the server tried to serve consumers for producers that no longer existed, and the error logs filled with consumer creation failures. The fix was a single conditional: only preserve an existing boolean value when the incoming delta explicitly omits the field — not when it provides <code>false</code>.
   </p>
 
   <!-- Latency before/after chart -->
   <div class="chart-section">
-    <div class="chart-title">API Latency — Before vs After Optimisations</div>
-    <div class="chart-subtitle">End-to-end score emission latency (frame captured to admin dashboard updated) across the architectural evolution.</div>
+    <div class="chart-title">End-to-End Score Latency — Architecture Evolution</div>
+    <div class="chart-subtitle">Frame captured to admin dashboard updated, across each architectural iteration.</div>
     <div class="chart-wrap" style="height:260px">
       <canvas id="latencyChart" role="img" aria-label="Bar chart comparing latency across four system states: initial server-side, optimised server-side, client-side WASM, and current production">Latency comparison: Server-side naive 820ms, Server-side optimised 380ms, Client-side WASM 145ms, Production current 110ms.</canvas>
     </div>
   </div>
 
-  <h3>Redis Degraded Mode</h3>
+  <h3>Degraded Mode for Cache Failures</h3>
 
   <p>
-    The load-induced failures revealed another design gap: what happens to the system when Redis becomes unavailable? The original implementation simply threw on Redis connection failure and stopped processing. The corrected approach was explicit degraded-mode operation: if Redis is unavailable at startup or loses connectivity during a session, the Python worker continues emitting real-time scores using in-memory state, violation counting pauses, and a background health worker attempts reconnection every 30 seconds. The guarantee is that live score monitoring continues even if the violation persistence layer is down — the admin can still see what is happening, even if the final report will be incomplete.
+    The load-induced failures revealed another design gap: what happens to the system when the cache layer becomes unavailable? The original implementation simply threw on connection failure and stopped processing. The corrected approach was explicit degraded-mode operation: if the cache is unavailable at startup or loses connectivity during a session, the Python worker continues emitting real-time scores using in-memory state, violation counting pauses, and a background health worker attempts reconnection. The guarantee is that live score monitoring continues even if the violation persistence layer is down.
   </p>
 
   <div class="metrics-grid">
@@ -869,11 +1289,11 @@
     </div>
     <div class="metric-card">
       <div class="metric-val">7</div>
-      <div class="metric-label">Redis calls per frame (3 violations)</div>
+      <div class="metric-label">Cache calls per frame (3 violations)</div>
     </div>
     <div class="metric-card">
       <div class="metric-val">100%</div>
-      <div class="metric-label">EC2 CPU at saturation</div>
+      <div class="metric-label">Server CPU at saturation</div>
     </div>
   </div>
 
@@ -884,24 +1304,58 @@
   </h2>
 
   <p>
-    After the production failure, there were three options on the table. The first was vertical scaling — a bigger EC2 instance with more CPU. This would have bought time but not solved the fundamental problem: the architecture scaled linearly with users, meaning twice the instance cost for twice the users, indefinitely. The second option was horizontal scaling — multiple Python workers distributed across instances, with Mediasoup routing streams to available workers. This was the right long-term answer for a pure server-side architecture, but it introduced significant complexity: worker discovery, load balancing, session affinity, and the question of what happens when a worker dies mid-session.
+    After the production failure, there were three options on the table. The first was vertical scaling — a bigger server with more CPU. This would have bought time but not solved the fundamental problem: the architecture scaled linearly with users, meaning twice the instance cost for twice the users, indefinitely. The second option was horizontal scaling — multiple Python workers distributed across instances. This was the right long-term answer for a pure server-side architecture, but it introduced significant complexity: worker discovery, load balancing, session affinity, and the question of what happens when a worker dies mid-session.
   </p>
 
   <p>
-    The third option was a topology change. Instead of routing video to a central analysis server, move the analysis to where the video originates — the student's browser. Modern browsers support WebAssembly, and MediaPipe now ships a WASM-native inference runtime. The student's device runs the MediaPipe models locally, processes its own camera frames, and sends only the computed results — scores, violation flags, gaze data — to the server.
+    The third option was a topology change. Instead of routing video to a central analysis server, move the analysis to where the video originates — the student's browser. Modern browsers support WebAssembly, and MediaPipe ships a WASM-native inference runtime. The student's device runs the MediaPipe models locally, processes its own camera frames, and sends only the computed results — scores, violation flags, gaze data — to the server.
   </p>
 
   <div class="pullquote">
     <p>"Instead of scaling one server to handle hundreds of inference workloads, let hundreds of devices each handle one. The compute distribution is free — it comes with the students."</p>
   </div>
 
+  <div class="optimization-images">
+    <img src="./assets/images/EC2_Optimized.png" alt="After optimizations EC2" height="350px">
+  </div>
+
   <p>
     This is not a novel idea in computer science — it is the same reasoning behind edge computing and CDNs — but applying it to AI inference requires careful thinking about the trust boundary implications. When the server runs inference, it controls the analysis. When the client runs inference, the results it sends to the server are only as trustworthy as the client itself.
   </p>
 
+  <!-- Before/After architecture comparison -->
+  <div class="before-after">
+    <div class="ba-panel before">
+      <span class="ba-label">Before — Centralised Inference</span>
+      <div class="ba-title">Server-side AI Worker</div>
+      <ul class="ba-list">
+        <li>Python process pulls frames over WebRTC</li>
+        <li>MediaPipe runs on shared server CPU</li>
+        <li>50–140ms blocking per frame per student</li>
+        <li>Scales O(n) — more students = more server</li>
+        <li>Fails at 5 concurrent users</li>
+        <li>Inference + SFU compete for same resources</li>
+        <li>Server is ground truth for all analysis</li>
+      </ul>
+    </div>
+    <div class="ba-panel after">
+      <span class="ba-label">After — Distributed Inference</span>
+      <div class="ba-title">Browser-side WASM Engine</div>
+      <ul class="ba-list">
+        <li>MediaPipe runs in each student's browser</li>
+        <li>GPU delegate via WebGL where available</li>
+        <li>Zero server CPU for AI inference</li>
+        <li>Scales O(1) — each device is its own worker</li>
+        <li>Tested to 200+ concurrent sessions</li>
+        <li>Server validates results + persists evidence</li>
+        <li>Trust model: evidence frames are ground truth</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="callout warn">
     <span class="callout-title">The trust boundary problem</span>
-    Moving inference to the client creates a security gap: a technically sophisticated student could potentially intercept the WebSocket connection and send fabricated scores rather than real analysis results. This is the same category of vulnerability as any client-side game where the client reports its own score. The mitigation is server-side validation of the evidence: every confirmed violation must be accompanied by an actual JPEG evidence frame uploaded to the server, which is stored in S3 and reviewed by admins. You cannot fake a frame that clearly shows a legitimate violation. The score alone is not the ground truth — the evidence is.
+    Moving inference to the client creates a security gap: a technically sophisticated student could potentially intercept the real-time channel and send fabricated scores rather than real analysis results. This is the same category of vulnerability as any client-side game where the client reports its own score. The mitigation is server-side validation of the evidence: every confirmed violation must be accompanied by an actual JPEG evidence frame uploaded to the server, which is stored and reviewed by admins. You cannot fake a frame that clearly shows a legitimate violation. The score alone is not the ground truth — the evidence is.
   </div>
 
   <!-- ════════ SECTION 6 ════════ -->
@@ -911,7 +1365,7 @@
   </h2>
 
   <p>
-    The implementation used <strong>MediaPipe Tasks</strong> — Google's newer, modular inference API that replaced the original MediaPipe framework. The Tasks API uses WebAssembly for the inference runtime and pre-compiled <code>.task</code> model bundles that are served as static assets. The relevant files — <code>face_landmarker.task</code> and the WASM runtime files <code>vision_wasm_internal.wasm</code> and <code>vision_wasm_nosimd_internal.wasm</code> — live in the student frontend's <code>public</code> directory and are served at startup. The WASM file without SIMD is the fallback for browsers that do not support SIMD extensions, which covers a meaningful tail of older hardware that students might use.
+    The implementation used <strong>MediaPipe Tasks</strong> — Google's newer, modular inference API that uses WebAssembly for the inference runtime and pre-compiled model bundles served as static assets. The model files live in the student frontend's public directory and are served at startup. A non-SIMD fallback covers older hardware that students might use.
   </p>
 
   <div class="code-block">
@@ -939,12 +1393,12 @@
   numFaces: <span class="num">2</span>,  <span class="cm">// detect up to 2 faces for multiple-face violation</span>
 });
 
-<span class="cm">// Results go to the server as Socket.IO events, not raw frames</span>
+<span class="cm">// Results go to the server as real-time events, not raw frames</span>
 socket.emit(<span class="str">'proctoring_score'</span>, {
   studentId, quizId, score, flags, timestamp
 });
 
-<span class="cm">// Evidence: actual JPEG frame uploaded to server endpoint</span>
+<span class="cm">// Evidence: actual JPEG frame uploaded for server verification</span>
 <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">`${serverBase}/api/proctoring/evidence`</span>, {
   method: <span class="str">'POST'</span>,
   body: formData,  <span class="cm">// canvas.toBlob() JPEG</span>
@@ -952,7 +1406,7 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </div>
 
   <p>
-    The GPU delegate is the key to making this viable on student hardware. MediaPipe's WASM runtime can use WebGL to offload tensor operations to the GPU, which on most modern laptops means the inference runs without measurable impact on the rest of the page. On devices without WebGL support, it falls back to CPU computation — slower, but still entirely local and still freeing the server from analysis work.
+    The GPU delegate is the key to making this viable on student hardware. The WASM runtime can use WebGL to offload tensor operations to the GPU, which on most modern laptops means the inference runs without measurable impact on the rest of the page. On devices without WebGL support, it falls back to CPU computation — slower, but still entirely local and still freeing the server from analysis work.
   </p>
 
   <!-- Architecture: client-side -->
@@ -972,33 +1426,33 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
       <text x="125" y="82" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#1a3a6b">MediaPipe WASM</text>
 
       <rect x="30" y="105" width="190" height="36" rx="6" fill="white" stroke="#99aac8" stroke-width="1"/>
-      <text x="125" y="127" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#1a3a6b">face_landmarker.task</text>
+      <text x="125" y="127" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#1a3a6b">face_landmarker model</text>
 
       <rect x="30" y="150" width="190" height="36" rx="6" fill="#fff3e0" stroke="#b36000" stroke-width="1"/>
       <text x="125" y="172" text-anchor="middle" font-family="DM Mono,monospace" font-size="11" fill="#7a4000">GPU delegate inference</text>
 
       <rect x="30" y="196" width="190" height="48" rx="6" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1"/>
-      <text x="125" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c">Score + flags (Socket.IO)</text>
+      <text x="125" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c">Score + flags (real-time events)</text>
       <text x="125" y="232" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1a6b3c">Evidence JPEG (HTTP POST)</text>
 
       <!-- SFU -->
       <rect x="290" y="60" width="130" height="60" rx="8" fill="#fff3e0" stroke="#b36000" stroke-width="1.5"/>
-      <text x="355" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7a4000" font-weight="500">Mediasoup SFU</text>
+      <text x="355" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7a4000" font-weight="500">WebRTC SFU</text>
       <text x="355" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#a06000">Media routing only</text>
 
       <!-- LMS Backend -->
       <rect x="290" y="160" width="130" height="80" rx="8" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
       <text x="355" y="188" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#c62828" font-weight="500">LMS Backend</text>
       <text x="355" y="206" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Validate + persist</text>
-      <text x="355" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Redis dedup (server)</text>
+      <text x="355" y="222" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#c62828">Server-side dedup</text>
 
-      <!-- S3 + Admin -->
+      <!-- Storage + Admin -->
       <rect x="480" y="60" width="110" height="50" rx="8" fill="#f3e5f5" stroke="#6a1a8a" stroke-width="1.5"/>
-      <text x="535" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">AWS S3</text>
+      <text x="535" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#6a1a8a" font-weight="500">Object Storage</text>
       <text x="535" y="98" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6a1a8a">Evidence frames</text>
 
       <rect x="480" y="160" width="110" height="50" rx="8" fill="#e8f5ed" stroke="#1a6b3c" stroke-width="1.5"/>
-      <text x="535" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a6b3c" font-weight="500">Admin LiveView</text>
+      <text x="535" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1a6b3c" font-weight="500">Admin Dashboard</text>
       <text x="535" y="198" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#1a6b3c">Scores + streams</text>
 
       <!-- arrows -->
@@ -1017,11 +1471,11 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   <h3>Local Suppression and the Trust Boundary</h3>
 
   <p>
-    The deduplication logic also moved partially client-side. The student's browser maintains a <code>localStorage</code>-based TTL map, keyed on <code>violation:{quizId}:{studentId}:{violationType}</code>. When a violation fires, the client checks this map before emitting to the server, suppressing duplicates within the same TTL window. This reduces socket chatter significantly — the server does not receive a constant stream of identical violation events for a student sitting in a dark room.
+    The deduplication logic also moved partially client-side. The student's browser maintains a TTL-keyed map for each violation type within a session. When a violation fires, the client checks this map before emitting to the server, suppressing duplicates within the same TTL window. This reduces event chatter significantly — the server does not receive a constant stream of identical violation events for a student sitting in a dark room.
   </p>
 
   <p>
-    However, the server does not trust the client's suppression. The LMS backend maintains its own server-side Redis deduplication layer. A client that deliberately omits the suppression check and sends every violation on every frame will find that the server drops the duplicates before they hit the scoring pipeline. The client-side suppression is a performance optimisation. The server-side suppression is the integrity guarantee.
+    However, the server does not trust the client's suppression. The backend maintains its own server-side deduplication layer. A client that deliberately omits the suppression check and sends every violation on every frame will find that the server drops the duplicates before they hit the scoring pipeline. The client-side suppression is a performance optimisation. The server-side suppression is the integrity guarantee.
   </p>
 
   <!-- Scaling comparison chart -->
@@ -1039,9 +1493,9 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </div>
 
   <!-- ════════ SECTION 7 ════════ -->
-  <h2 class="section-title" id="liveview">
+  <h2 class="section-title" id="admin-dashboard">
     <span class="num">07 —</span>
-    The Admin LiveView: Rendering 200+ Simultaneous Streams
+    The Admin Dashboard: Rendering 200+ Simultaneous Streams
   </h2>
 
   <p>
@@ -1049,13 +1503,13 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </p>
 
   <p>
-    The original LiveView was a single monolithic React component. It managed stream state, score state, filter state, and virtual grid state in one place. When a proctoring score arrived for student 47, the entire component re-rendered, the entire student list was re-filtered, and the entire grid was re-laid out. At 20 students this was fine. At 100 it was visibly slow. At 200 it was unusable.
+    The original admin live view was a single monolithic React component. It managed stream state, score state, filter state, and virtual grid state in one place. When a proctoring score arrived for student 47, the entire component re-rendered, the entire student list was re-filtered, and the entire grid was re-laid out. At 20 students this was fine. At 100 it was visibly slow. At 200 it was unusable.
   </p>
 
   <h3>The Three-Part Fix</h3>
 
   <p>
-    The refactor had three distinct parts, each targeting a different bottleneck. The first was component decomposition — splitting the monolith into focused units: <code>LiveStudentGridVirtualized</code> for the scrollable grid, <code>LiveStudentTileContainer</code> for per-student state, <code>LiveStudentTileMedia</code> for WebRTC media attachment, and <code>LiveStudentScoreBadge</code> for the score indicator. Each component now has a defined scope of re-rendering: a score update no longer touches the grid or the media layer.
+    The refactor had three distinct parts, each targeting a different bottleneck. The first was component decomposition — splitting the monolith into focused units: a virtualized grid for the scrollable layout, a container per student for local state, a media component for WebRTC attachment, and a score badge component for the indicator. Each component now has a defined scope of re-rendering: a score update no longer touches the grid or the media layer.
   </p>
 
   <p>
@@ -1067,7 +1521,7 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
       <span class="code-dot" style="background:#ff5f57"></span>
       <span class="code-dot" style="background:#ffbd2e"></span>
       <span class="code-dot" style="background:#28c840"></span>
-      <span>ProctoringScoreContext.js — high-frequency score updates without re-renders</span>
+      <span>scoreStore.js — high-frequency score updates without re-renders</span>
     </div>
     <pre><span class="cm">// External score store — writes do not trigger React re-renders</span>
 <span class="kw">const</span> scoreStore = createExternalScoreStore();
@@ -1086,22 +1540,22 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </div>
 
   <p>
-    The third part was virtual rendering. A real DOM node for each of 200 student tiles — including the WebRTC video element, score badge, and overlay information — is expensive to maintain even when off-screen. The solution was <code>react-window</code>'s <code>FixedSizeGrid</code>, which renders only the tiles currently visible in the viewport plus a configurable warm buffer ahead of the scroll position.
+    The third part was virtual rendering. A real DOM node for each of 200 student tiles — including the WebRTC video element, score badge, and overlay information — is expensive to maintain even when off-screen. The solution was a virtualized grid renderer, which renders only the tiles currently visible in the viewport plus a configurable warm buffer ahead of the scroll position.
   </p>
 
   <p>
-    The stream budget system tied the virtual rendering to the media layer. Tiles visible in the viewport are in <code>live</code> mode — full WebRTC stream active. Tiles within 12 positions of the viewport edge are <code>warm</code> — stream maintained but paused. Tiles beyond that are <code>cold</code> — consumer closed. This keeps the number of active WebRTC consumers bounded regardless of how many students are in the exam.
+    The stream budget system tied the virtual rendering to the media layer. Tiles visible in the viewport are in <em>live</em> mode — full WebRTC stream active. Tiles within 12 positions of the viewport edge are <em>warm</em> — stream maintained but paused. Tiles beyond that are <em>cold</em> — consumer closed. This keeps the number of active WebRTC consumers bounded regardless of how many students are in the exam.
   </p>
 
   <!-- Render performance chart -->
   <div class="chart-section">
     <div class="chart-title">Admin Dashboard Render Performance</div>
-    <div class="chart-subtitle">Re-renders per second triggered by score updates. After the useSyncExternalStore refactor, only the affected tile re-renders — not the entire grid.</div>
+    <div class="chart-subtitle">Re-renders per second triggered by score updates. After the external store refactor, only the affected tile re-renders — not the entire grid.</div>
     <div class="chart-wrap" style="height:260px">
       <canvas id="renderChart" role="img" aria-label="Bar chart comparing re-renders per second for monolithic vs decomposed component architecture">Monolithic at 20 students: 20 re-renders/s. At 100 students: 100 re-renders/s. At 200 students: 200 re-renders/s. Decomposed: 1 re-render per update regardless of student count.</canvas>
     </div>
     <div class="chart-legend">
-      <div class="legend-item"><div class="legend-swatch" style="background:#c0392b"></div>Monolithic LiveView (full tree re-render)</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#c0392b"></div>Monolithic component (full tree re-render)</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#1a6b3c"></div>Decomposed + useSyncExternalStore</div>
     </div>
   </div>
@@ -1109,89 +1563,152 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   <h3>The Black-Screen Problem and the Stream Phase Model</h3>
 
   <p>
-    Black screens on admin tiles were one of the most persistent and frustrating bugs in the system. An admin would load the LiveView, and some tiles would show video while others showed a perpetual loading spinner. The problem was a race condition between the consumer creation on the server and the media element attachment in the browser.
+    Black screens on admin tiles were one of the most persistent and frustrating bugs in the system. An admin would load the live view, and some tiles would show video while others showed a perpetual loading spinner. The problem was a race condition between consumer creation on the server and media element attachment in the browser.
   </p>
 
   <p>
-    The fix was a deterministic stream phase model. Instead of a single <code>isLoading</code> boolean, each tile tracks an explicit phase: <code>idle → checking → creating_consumer → attaching → playing → stopped</code>. Each phase transition has a guarded condition. The loader is released only when a genuine playable media signal — <code>loadedmetadata</code>, <code>canplay</code>, or <code>playing</code> — arrives on the video element AND all readiness checks pass. An attach watchdog timer detects stalls: if the tile has been in <code>attaching</code> for more than 6 seconds without a playable signal, it resets to <code>idle</code> and retries, up to two times.
+    The fix was a deterministic stream phase model. Instead of a single <code>isLoading</code> boolean, each tile tracks an explicit phase: <code>idle → checking → creating_consumer → attaching → playing → stopped</code>. Each phase transition has a guarded condition. The loader is released only when a genuine playable media signal arrives on the video element AND all readiness checks pass. An attach watchdog timer detects stalls: if the tile has been in <code>attaching</code> for more than 6 seconds without a playable signal, it resets to <code>idle</code> and retries, up to two times.
   </p>
 
   <div class="callout good">
     <span class="callout-title">The grace period that kept changing</span>
-    One detail that illustrates how production pressure evolves an architecture: the offscreen stream grace period — how long a tile keeps its WebRTC consumer alive after scrolling off screen — started at 3 seconds in the design document. By the time it reached stable production, it was 45 seconds. The reason was real: admins scroll quickly through the student grid while monitoring an exam. A 3-second grace period meant streams were being torn down and re-established on nearly every scroll interaction, causing visible stream startup latency. 45 seconds was the threshold at which the re-establishment cost became imperceptible. This number was not derived analytically — it was tuned against real admin behaviour.
+    One detail that illustrates how production pressure evolves an architecture: the offscreen stream grace period — how long a tile keeps its WebRTC consumer alive after scrolling off screen — started at 3 seconds. By the time it reached stable production, it was 45 seconds. The reason was real: admins scroll quickly through the student grid while monitoring an exam. A 3-second grace period meant streams were being torn down and re-established on nearly every scroll interaction, causing visible startup latency. 45 seconds was the threshold at which the re-establishment cost became imperceptible. This number was not derived analytically — it was tuned against real admin behaviour.
   </div>
 
-  <!-- ════════ SECTION 8 ════════ -->
-  <h2 class="section-title" id="lessons">
+  <!-- ════════ SECTION 8: RESULTS ════════ -->
+  <h2 class="section-title" id="results">
     <span class="num">08 —</span>
-    What This System Taught Me About Building at the Edge
+    What Actually Changed: Before, After, and the Numbers
   </h2>
 
   <p>
-    Looking back across the full arc of the system — from a single Mediasoup router to a client-side WASM inference engine with a server-side validation layer — a few principles stand out as genuinely hard-won rather than things I could have read in advance.
+    Across the full arc of refactors, the system transformed from a centralised bottleneck into a distributed topology where each student device carries its own inference load. The server stopped being an AI worker and became what it should have been from the start: a validation, persistence, and fan-out layer.
   </p>
 
-  <h3>Co-location debt is invisible until load arrives</h3>
-
-  <p>
-    Running the AI worker and the media server on the same instance was not a mistake at the time — it was the simplest thing that could work, and it did work, in development and in small demos. The problem is that co-location debt does not show up in unit tests, code review, or load testing at low concurrency. It only shows up when real users with real hardware are doing real things simultaneously. Build for co-location initially if you must, but document the assumed scale limit and set a tripwire to revisit the architecture when you approach it.
-  </p>
-
-  <h3>Moving compute to the client is an architectural decision, not just an optimisation</h3>
-
-  <p>
-    Shifting MediaPipe inference from the server to the browser was not a performance tweak — it was a fundamental change to the trust model, the data flow, and the security surface of the system. Every downstream system had to be updated to account for the new source of truth. The Redis deduplication moved. The evidence pipeline changed. The server-side validation layer was added. If you are considering a similar move for your system, model the trust implications before you model the performance gains.
-  </p>
-
-  <h3>React's state model is not designed for 80 updates per second</h3>
-
-  <p>
-    This is something the React documentation tells you implicitly but engineers discover painfully. <code>useState</code> and <code>useReducer</code> are designed for user-driven events. A proctoring score feed is not a user-driven event — it is a continuous data stream. <code>useSyncExternalStore</code> exists precisely for this case, and reaching for it early when you know you will have high-frequency updates will save you a significant amount of performance debugging later.
-  </p>
-
-  <h3>WebRTC lifecycle management requires explicit phase modelling</h3>
-
-  <p>
-    Every WebRTC connection bug we encountered — black screens, stuck loaders, stale consumers, producer-not-found errors — was a lifecycle bug. The connection was in a state that the code did not have an explicit representation for, so it fell through to undefined behaviour. The stream phase model solved this not by adding more code but by forcing every possible state to be named and every transition to be guarded. If you are building WebRTC infrastructure, model the lifecycle first. The signaling is the easy part.
-  </p>
-
-  <h3>Production numbers always differ from design numbers</h3>
-
-  <p>
-    The offscreen grace period changing from 3 seconds to 45 seconds is a microcosm of how real systems evolve. A number that is analytically defensible at design time often turns out to be wrong at the scale and usage patterns of production. Build systems that make these numbers configurable rather than hard-coded, instrument the metrics that will tell you when a number is wrong, and expect to revise every threshold at least once after deployment.
-  </p>
-
-  <div class="divider"></div>
-
-  <!-- FINAL METRICS -->
-  <h3 style="font-size:19px; margin-bottom:20px">System at a Glance — Before and After</h3>
-
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-val" style="color:var(--green)">200+</div>
-      <div class="metric-label">Concurrent streams supported</div>
+  <!-- Full before/after summary table -->
+  <div class="before-after" style="margin-bottom:40px">
+    <div class="ba-panel before">
+      <span class="ba-label">Initial Architecture</span>
+      <div class="ba-title">What Failed</div>
+      <ul class="ba-list">
+        <li>Server CPU saturated at 5 concurrent users</li>
+        <li>820ms end-to-end score latency (naive)</li>
+        <li>Every score update re-rendered all 200 tiles</li>
+        <li>Black-screen tiles with indefinite loaders</li>
+        <li>Session state leaked after disconnect</li>
+        <li>7 cache round-trips per frame with 3 violations</li>
+        <li>Co-located SFU and AI worker — shared contention</li>
+      </ul>
     </div>
-    <div class="metric-card">
-      <div class="metric-val" style="color:var(--green)">~0%</div>
-      <div class="metric-label">Server CPU for AI inference</div>
+    <div class="ba-panel after">
+      <span class="ba-label">Production Architecture</span>
+      <div class="ba-title">What Improved</div>
+      <ul class="ba-list">
+        <li>Server CPU ~flat regardless of session count</li>
+        <li>110ms end-to-end score latency in production</li>
+        <li>1 re-render per score update (subscribed tile only)</li>
+        <li>Deterministic phase model — no stuck loaders</li>
+        <li>Disconnect delta correctly propagates false</li>
+        <li>Client-side suppression cuts event chatter</li>
+        <li>SFU handles media; server handles logic only</li>
+      </ul>
     </div>
-    <div class="metric-card">
-      <div class="metric-val" style="color:var(--green)">110ms</div>
-      <div class="metric-label">Score-to-dashboard latency</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-val" style="color:var(--green)">1</div>
-      <div class="metric-label">Re-renders per score update</div>
+  </div>
+
+  <!-- Final results block -->
+  <div class="results-block">
+    <span class="results-block-label">Final Production Results</span>
+    <h3>System Performance After Full Refactor</h3>
+    <div class="results-grid">
+      <div class="result-item">
+        <div class="result-val">200+</div>
+        <div class="result-label">Concurrent exam sessions supported without server CPU pressure</div>
+      </div>
+      <div class="result-item">
+        <div class="result-val">~0%</div>
+        <div class="result-label">Server CPU consumed by AI inference (was ~14% per student)</div>
+      </div>
+      <div class="result-item">
+        <div class="result-val">110ms</div>
+        <div class="result-label">Score-to-dashboard latency (down from 820ms in naive server-side)</div>
+      </div>
+      <div class="result-item">
+        <div class="result-val">1</div>
+        <div class="result-label">Component re-renders per score event regardless of grid size</div>
+      </div>
+      <div class="result-item">
+        <div class="result-val">O(1)</div>
+        <div class="result-label">Server scaling characteristic for AI inference load</div>
+      </div>
+      <div class="result-item">
+        <div class="result-val">−87%</div>
+        <div class="result-label">Reduction in end-to-end latency vs initial server-side architecture</div>
+      </div>
     </div>
   </div>
 
   <div class="callout good">
-    <span class="callout-title">Stack reference</span>
-    <strong>Media:</strong> Mediasoup SFU (Node.js), WebRTC, aiortc (legacy path). <strong>AI:</strong> MediaPipe Tasks (WASM, browser-side), FaceLandmarker, GPU/CPU delegate. <strong>Real-time:</strong> Socket.IO, Redis (TTL dedup, violation counts). <strong>Storage:</strong> PostgreSQL (reports), AWS S3 (evidence frames), DynamoDB (frame logs via n8n). <strong>Frontend:</strong> React, useSyncExternalStore, react-window, Redux Toolkit. <strong>Queue:</strong> BullMQ for delayed report generation.
+    <span class="callout-title">Full stack reference</span>
+    <strong>Media:</strong> Mediasoup SFU (Node.js), WebRTC, secondary WebRTC path for AI (legacy). <strong>AI:</strong> MediaPipe Tasks (WASM, browser-side), Face Landmarker, GPU/CPU delegate. <strong>Real-time:</strong> Socket.IO, Redis (TTL dedup, violation counts). <strong>Storage:</strong> PostgreSQL (reports), object storage (evidence frames), log store (frame events). <strong>Frontend:</strong> React, useSyncExternalStore, virtual grid renderer. <strong>Queue:</strong> async job queue for delayed report generation and webhook dispatch.
   </div>
 
-  <p style="margin-top:40px">
-    Every system that runs under real load eventually reveals the assumptions it was built on. This one revealed them faster than most, and at a scale that was embarrassingly small — five users. But the decisions it forced — about where compute lives, how trust is established, and how to model asynchronous lifecycle — were the right decisions to be forced into making. The system that came out the other side was architecturally honest in a way the original was not.
+  <!-- ════════ SECTION 9 ════════ -->
+  <h2 class="section-title" id="lessons">
+    <span class="num">09 —</span>
+    What This System Taught Me
+  </h2>
+
+  <p>
+    Looking back across the full arc — from a single routing server to a browser-distributed inference engine with a server-side validation layer — a few principles stand out as genuinely hard-won rather than things I could have read in advance.
+  </p>
+
+  <div class="lesson-grid">
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 01</span>
+      <h4>Co-location debt is invisible until load arrives</h4>
+      <p>Running the AI worker and the media server on the same instance was fine in development. The problem only showed at real concurrency. Co-location debt does not appear in tests or code review. Build for it initially if you must, but set a tripwire to revisit when you approach the assumed scale limit.</p>
+    </div>
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 02</span>
+      <h4>Moving compute to the client is architectural, not just an optimisation</h4>
+      <p>Shifting inference to the browser was not a performance tweak — it changed the trust model, data flow, and security surface of the entire system. Every downstream component had to be updated. Model the trust implications before you model the performance gains.</p>
+    </div>
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 03</span>
+      <h4>React's state model is not designed for 80 updates per second</h4>
+      <p><code>useState</code> and <code>useReducer</code> are designed for user-driven events. A proctoring score feed is a continuous data stream. <code>useSyncExternalStore</code> exists exactly for this case. Reach for it early when you know you will have high-frequency updates.</p>
+    </div>
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 04</span>
+      <h4>WebRTC lifecycle requires explicit phase modelling</h4>
+      <p>Every WebRTC bug we encountered — black screens, stuck loaders, stale consumers — was a lifecycle bug. The stream phase model solved this not by adding more code but by naming every possible state and guarding every transition. Model the lifecycle first. The signaling is the easy part.</p>
+    </div>
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 05</span>
+      <h4>Production numbers always differ from design numbers</h4>
+      <p>The offscreen grace period changing from 3 seconds to 45 seconds is a microcosm of how real systems evolve. Build systems that make these numbers configurable, instrument the metrics that will tell you when a number is wrong, and expect to revise every threshold at least once after deployment.</p>
+    </div>
+    <div class="lesson-card">
+      <span class="lesson-num">Lesson 06</span>
+      <h4>Real-time systems fail differently under actual concurrency</h4>
+      <p>The architecture looked correct until it ran under real load with real hardware and real network variance. Synthetic load tests caught none of the issues described in this post. Test with actual users in actual network conditions as early as possible.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>The Biggest Engineering Lesson</h3>
+
+  <p>
+    If this post has one central argument, it is this: <strong>the right place for compute is not always the server</strong>. We default to centralised processing because it is easier to reason about, easier to secure, and easier to monitor. But when the compute is AI inference on a video stream, and when the source of that stream is the client device, and when each user has a modern browser with GPU acceleration sitting idle — the centralised model is not just inefficient. It is the wrong architecture.
+  </p>
+
+  <p>
+    The system that came out the other side of these failures was architecturally honest in a way the original was not. The server does what servers are good at: validation, persistence, fan-out, and coordination. The clients do what clients are increasingly good at: local inference at the edge, with their own GPU, on their own frame data. The trust model is explicit rather than assumed. The scaling characteristic is O(1) rather than O(n).
+  </p>
+
+  <p>
+    Every system that runs under real load eventually reveals the assumptions it was built on. This one revealed them faster than most, and at a scale that was embarrassingly small — five users. But the decisions it forced — about where compute lives, how trust is established, and how to model asynchronous lifecycle — were the right decisions to be forced into making.
   </p>
 
   <p>
@@ -1199,6 +1716,80 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
   </p>
 
 </div>
+
+  <!-- ════════ CONTACT ════════ -->
+  <section style="background:#f0ede7; border-top:1px solid var(--rule); padding:72px 0 80px; margin-top:80px;">
+    <div class="container">
+      <span class="label">Get in touch</span>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(26px,4vw,40px); font-weight:900; line-height:1.2; margin-bottom:16px;">
+        Let's Compare Notes
+      </h2>
+      <p style="color:var(--mid); font-size:17px; max-width:520px; margin-bottom:40px; font-weight:300;">
+        Building something in this space? Hit a scaling wall you can't explain? 
+        I'm happy to talk through it.
+      </p>
+
+      <form
+        action="https://formspree.io/f/xwvywzbb"
+        method="POST"
+        style="display:grid; gap:16px; max-width:520px;"
+      >
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <label style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:500; color:var(--mid); display:block; margin-bottom:8px;">Name</label>
+            <input
+              type="text" name="name" required placeholder="Your name"
+              style="width:100%; padding:12px 16px; border:1.5px solid var(--rule); border-radius:8px; background:white; font-family:'DM Sans',sans-serif; font-size:15px; color:var(--ink); outline:none; transition:border-color .2s;"
+              onfocus="this.style.borderColor='var(--accent)'"
+              onblur="this.style.borderColor='var(--rule)'"
+            />
+          </div>
+          <div>
+            <label style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:500; color:var(--mid); display:block; margin-bottom:8px;">Email</label>
+            <input
+              type="email" name="email" required placeholder="you@example.com"
+              style="width:100%; padding:12px 16px; border:1.5px solid var(--rule); border-radius:8px; background:white; font-family:'DM Sans',sans-serif; font-size:15px; color:var(--ink); outline:none; transition:border-color .2s;"
+              onfocus="this.style.borderColor='var(--accent)'"
+              onblur="this.style.borderColor='var(--rule)'"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:500; color:var(--mid); display:block; margin-bottom:8px;">Message</label>
+          <textarea
+            name="message" required rows="5" placeholder="What are you building?"
+            style="width:100%; padding:12px 16px; border:1.5px solid var(--rule); border-radius:8px; background:white; font-family:'DM Sans',sans-serif; font-size:15px; color:var(--ink); outline:none; resize:vertical; transition:border-color .2s;"
+            onfocus="this.style.borderColor='var(--accent)'"
+            onblur="this.style.borderColor='var(--rule)'"
+          ></textarea>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+          <a href="mailto:shashankdhiman@example.com"
+            style="font-size:14px; color:var(--mid); text-decoration:none; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:16px;">✉</span>
+            dhimanshashank15@gmail.com
+          </a>
+          <button
+            type="submit"
+            style="background:var(--accent); color:white; border:none; padding:13px 32px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; letter-spacing:.04em; cursor:pointer; transition:background .2s;"
+            onmouseover="this.style.background='#a93226'"
+            onmouseout="this.style.background='var(--accent)'"
+          >
+            Send Message →
+          </button>
+        </div>
+      </form>
+
+      <p style="margin-top:32px; font-size:13px; color:var(--mid);">
+        Also on
+        <a href="https://github.com/dhimanshashank" target="_blank" style="color:var(--ink); font-weight:500;">GitHub</a>
+        ·
+        <a href="https://www.linkedin.com/in/shashank-dhiman-358535219/" target="_blank style="color:var(--ink); font-weight:500;">LinkedIn</a>
+      </p>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -1209,7 +1800,68 @@ socket.emit(<span class="str">'proctoring_score'</span>, {
 </footer>
 
 <script>
-// ─── CHART 1: CPU vs concurrent users ──────────────────────────
+// ─── SCROLL PROGRESS + READING HEADER ──────────────────────────────
+const scrollBar = document.getElementById('scroll-progress');
+const readingHeader = document.getElementById('reading-header');
+const masthead = document.getElementById('masthead');
+const activeSectionLabel = document.getElementById('active-section-label');
+
+const sections = [
+  { id: 'origin', label: 'The Origin' },
+  { id: 'streaming', label: 'Streaming' },
+  { id: 'server-ai', label: 'Server AI' },
+  { id: 'collapse', label: 'The Collapse' },
+  { id: 'shift', label: 'Architecture Shift' },
+  { id: 'client-ml', label: 'Client-Side ML' },
+  { id: 'admin-dashboard', label: 'Admin Dashboard' },
+  { id: 'results', label: 'Results' },
+  { id: 'lessons', label: 'Lessons' },
+];
+
+function onScroll() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  scrollBar.style.width = pct + '%';
+
+  // Show/hide reading header after masthead scrolls away
+  const mastheadBottom = masthead.getBoundingClientRect().bottom;
+  if (mastheadBottom < 0) {
+    readingHeader.classList.add('visible');
+  } else {
+    readingHeader.classList.remove('visible');
+  }
+
+  // Update active section label
+  let currentLabel = '';
+  for (const s of sections) {
+    const el = document.getElementById(s.id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 80) {
+        currentLabel = s.label;
+      }
+    }
+  }
+  activeSectionLabel.textContent = currentLabel;
+
+  // Highlight active nav link
+  document.querySelectorAll('.reading-header-nav a').forEach(a => {
+    a.classList.remove('active');
+  });
+  if (currentLabel) {
+    const matchedSection = sections.find(s => s.label === currentLabel);
+    if (matchedSection) {
+      const link = document.querySelector(`.reading-header-nav a[href="#${matchedSection.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  }
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// ─── CHART 1: CPU vs concurrent users ──────────────────────────────
 new Chart(document.getElementById('cpuChart'), {
   type: 'line',
   data: {
@@ -1245,7 +1897,6 @@ new Chart(document.getElementById('cpuChart'), {
     plugins: {
       legend: { display: false },
       tooltip: { mode: 'index', intersect: false },
-      annotation: {}
     },
     scales: {
       y: {
@@ -1263,18 +1914,18 @@ new Chart(document.getElementById('cpuChart'), {
   }
 });
 
-// ─── CHART 2: per-frame cost breakdown ─────────────────────────
+// ─── CHART 2: per-frame cost breakdown ─────────────────────────────
 new Chart(document.getElementById('costChart'), {
   type: 'bar',
   data: {
     labels: [
-      'Face Detection\n(MediaPipe)',
-      'Face Mesh\n(MediaPipe)',
-      'Redis calls\n(2N+1)',
-      'Socket.IO\nemission',
-      'Gaze\ncalculation',
-      'BGR→RGB +\nresize',
-      'Frame quality\nassessment'
+      'Face Detection',
+      'Face Mesh',
+      'Cache calls (2N+1)',
+      'Real-time emission',
+      'Gaze calculation',
+      'Color convert + resize',
+      'Frame quality check'
     ],
     datasets: [
       {
@@ -1311,7 +1962,7 @@ new Chart(document.getElementById('costChart'), {
   }
 });
 
-// ─── CHART 3: latency comparison ───────────────────────────────
+// ─── CHART 3: latency comparison ───────────────────────────────────
 new Chart(document.getElementById('latencyChart'), {
   type: 'bar',
   data: {
@@ -1414,7 +2065,7 @@ new Chart(document.getElementById('renderChart'), {
     labels: ['20 students', '50 students', '100 students', '200 students'],
     datasets: [
       {
-        label: 'Monolithic LiveView',
+        label: 'Monolithic admin view',
         data: [20, 50, 100, 200],
         backgroundColor: 'rgba(192,57,43,0.75)',
         borderWidth: 0,
