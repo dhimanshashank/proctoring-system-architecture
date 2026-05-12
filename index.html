@@ -1003,7 +1003,7 @@
     <p>"At four to five concurrent users, the server CPU hit 100% and stayed there. The SFU started dropping frames. The Python worker's heartbeats timed out. The entire system became unresponsive."</p>
   </div>
 
-  <!-- EC2 evidence: real server screenshots -->
+  <!-- EC2 evidence: real server screenshots
   <p>
     This was not a theoretical concern. The screenshots below are from the actual production EC2 instance — <code>htop</code> output captured during the failure and then again after the architecture change was deployed. The contrast tells the whole story.
   </p>
@@ -1022,7 +1022,7 @@
       <img src="./assets/images/EC2_Optimized.png" alt="EC2 htop showing low CPU utilization after moving inference to client-side WASM" style="width:100%;display:block;"/>
     </div>
   </div>
-  <p style="font-size:13px;color:var(--mid);text-align:center;font-style:italic;margin-top:-24px;margin-bottom:36px;">Real production EC2 instance metrics — before and after moving AI inference from the server to each student's browser.</p>
+  <p style="font-size:13px;color:var(--mid);text-align:center;font-style:italic;margin-top:-24px;margin-bottom:36px;">Real production EC2 instance metrics — before and after moving AI inference from the server to each student's browser.</p> -->
 
   <p>
     The root cause was not complicated once you understood the numbers. Each student stream was generating 1 analyzed frame per second. Each analysis was blocking the Python event loop for between 50 and 140 milliseconds. Two streams meant up to 280ms of blocking per second. Five streams meant up to 700ms. At that point, the Python process was spending more time blocked in MediaPipe inference than it had time available — the event loop was saturated before it could process incoming frames, emit scores, or respond to heartbeats.
@@ -1118,9 +1118,9 @@
     <p>"Instead of scaling one server to handle hundreds of inference workloads, let hundreds of devices each handle one. The compute distribution is free — it comes with the students."</p>
   </div>
 
-  <div class="optimization-images">
+  <!-- <div class="optimization-images">
     <img src="./assets/images/EC2_Optimized.png" alt="After optimizations EC2" height="350px">
-  </div>
+  </div> -->
 
   <p>
     This is not a novel idea in computer science — it is the same reasoning behind edge computing and CDNs — but applying it to AI inference requires careful thinking about the trust boundary implications. When the server runs inference, it controls the analysis. When the client runs inference, the results it sends to the server are only as trustworthy as the client itself.
